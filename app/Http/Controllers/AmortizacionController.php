@@ -14,6 +14,7 @@ class AmortizacionController extends Controller
 	{
 		$this->middleware('auth');
 	} 
+	
     public function store(Request $request)
     {
     	$validate = \Validator::make($request->all(), [          
@@ -50,7 +51,7 @@ class AmortizacionController extends Controller
 
     		return redirect()->route('pagos.detalles', $pago->id)->with('error', 'El valor de la cuota no puede ser menor o igual que cero');
 
-    	}	
+    	}
        
 		$dp->cuota_fija = $dp->cuota_fija + $request->cuota_fija;
     	$dp->update();

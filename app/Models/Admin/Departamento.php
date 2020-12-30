@@ -3,7 +3,7 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admin\DepartamentoEmpresa;
+use App\Models\Admin\CargoDepartamento;
 
 class Departamento extends Model
 {
@@ -11,11 +11,10 @@ class Departamento extends Model
     protected $fillable = ['nombre_departamento', 'descripcion_departamento', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     
-    public function departamentosEmpresa()
+    public function cargosDepartamento ()
     {
-        return $this->hasMany(DepartamentoEmpresa::class, 'departamento_id');
+        return $this->hasMany(CargoDepartamento::class, 'cargo_id');
     }
-
 
     /*
         Scopes

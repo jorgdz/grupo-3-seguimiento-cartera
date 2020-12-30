@@ -77,14 +77,15 @@
                                 {{ Form::text('celular', null, ['placeholder' => 'Celular del usuario', 'class' => 'form-control']) }}
                             </div> 
 
-                            <div class="form-group">
-                                {{ Form::label('telefono', 'Teléfono del usuario') }}
-                                {{ Form::text('telefono', null, ['placeholder'=>'Teléfono convencional', 'class' => 'form-control']) }}
-                            </div>
+                            
 
                         </div>
 
                         <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ Form::label('telefono', 'Teléfono del usuario') }}
+                                {{ Form::text('telefono', null, ['placeholder'=>'Teléfono convencional', 'class' => 'form-control']) }}
+                            </div>
                             <div class="form-group">
                                 {{ Form::label('genero_id', 'Genero') }}
                                 {!! Form::select('genero_id', $generos->pluck('nombre_genero', 'id'), null, ['class' => 'form-control']) !!}
@@ -100,20 +101,10 @@
                                 {{ Form::email('email', null, ['placeholder'=>'Correo', 'class' => 'form-control']) }}
                             </div> 
 
-                            <div class="form-group">
-                                <label id="si">{{ Form::radio('discapacidad', '1') }} Posee alguna discapacidad</label> &nbsp; &nbsp; &nbsp;
-                                <label id="no">{{ Form::radio('discapacidad', '0', ['checked']) }} No posee ninguna discapacidad</label>
-                            </div>
-                          
-
-                            <div class="form-group" id="discapacidad">
-                                {{ Form::label('comentario', 'Comentar la discapacidad del usuario') }}
-                                {{ Form::textarea('comentario', null, ['class' => 'form-control', 'rows' => '3']) }}
-                            </div>
                             
                             <div class="form-group">
-                                {{ Form::label('extension', 'Extension') }}
-                                {{ Form::text('extension', null, ['placeholder' => 'Extension', 'class' => 'form-control']) }}
+                                {{ Form::label('campania', 'Campaña') }}
+                                {{ Form::text('campania', null, ['placeholder' => 'Campaña asignada', 'class' => 'form-control']) }}
                             </div> 
 
                             <div class="form-group">
@@ -125,16 +116,7 @@
                                 {{ Form::label('fecha_nacimiento', 'Fecha de nacimiento') }}
                                 {{ Form::date('fecha_nacimiento', date('Y-m-d'), ['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group">
-                                    <label >{{ Form::radio('area', '1') }} AREA VENTAS</label> &nbsp; &nbsp; &nbsp;
-                                    <label >{{ Form::radio('area', '0') }} AREA COBRANZA</label>&nbsp; &nbsp; &nbsp;
-                                    <label >{{ Form::radio('area', '2') }} ADMINISTRATIVA</label>
-                                </div>
-                                <div class="form-group">
-                                        <label >{{ Form::radio('rol', '1') }} AGENTE</label> &nbsp; &nbsp; &nbsp;
-                                        <label >{{ Form::radio('rol', '0') }} OPERATIVO</label>
-                                        
-                                    </div>
+            
                         </div>
                     </div>                                
                     {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}

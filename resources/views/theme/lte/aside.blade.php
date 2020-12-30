@@ -1,10 +1,10 @@
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     @if(Auth::user())
   <!-- Brand Logo -->
     <a href="{{ route('inicio') }}" class="brand-link">
       <img src="{{ asset('inicio.png') }}" alt="logo" class="brand-image  elevation-8"
-           style="opacity: 1">
+            style="opacity: 1">
       <span class="brand-text font-weight-light">&&</span>
     </a>
 
@@ -15,7 +15,7 @@
         <div class="image">
             
           <img src="{{ asset('fotos/'.Auth::user()->foto) }}" class="img-circle elevation-4" alt="{{ Auth::user()->foto }}">
-         
+          
         </div>
         <div class="info">
           <a href="{{ route('perfil.edit') }}" class="d-block">{{ Auth::user()->nombre1 }} {{ Auth::user()->apellido_paterno }} {{ Auth::user()->apellido_materno }}</a>
@@ -29,57 +29,33 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
-            @can('empresas.index')    
-                <li class="nav-item has-treeview menu-open">
-                  <a href="#" class="nav-link active">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Administración
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  
-                  @can('empresas.index') 
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-building"></i>
-                          <p>
-                            Organización
-                            <i class="right fas fa-angle-left"></i>
-                          </p>
-                        </a>
-                    @endcan
-                    @can('empresas.index')
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="{{ route('empresas.index') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Empresas</p>
-                        </a>
-                      </li>
-                    @endcan
-                    @can('departamentos.index')
-                      <li class="nav-item">
-                        <a href="{{ route('departamentos.index') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Departamentos</p>
-                        </a>
-                      </li>
-                    @endcan
-                            @can('cargos.index')
-                            <li class="nav-item">
-                              <a href="{{ route('cargos.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cargos</p>
-                              </a>
-                            </li>
-                            @endcan
-                      </ul>
-                  
-
-
-                  
+          
+                  <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                        Administración
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                  </li>
+                
+                  @can('departamentos.index')
+                    <li class="nav-item">
+                      <a href="{{ route('departamentos.index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Departamentos</p>
+                      </a>
+                    </li>
+                  @endcan
+                  @can('cargos.index')
+                  <li class="nav-item">
+                    <a href="{{ route('cargos.index') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Cargos</p>
+                    </a>
+                  </li>
+                  @endcan      
 
                   @can('users.index')
                     <li class="nav-item">
@@ -99,30 +75,17 @@
                       </li>
                   @endcan 
 
-                    @can('roles.index')
-                      <li class="nav-item">
-                          <a href="{{ route('roles.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Roles</p>
-                          </a>
-                      </li>
-                    @endcan 
-                    
+                  @can('roles.index')
+                    <li class="nav-item">
+                        <a href="{{ route('roles.index') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Roles</p>
+                        </a>
+                    </li>
+                  @endcan 
+                            
             
-              </ul>
-            </li>
-            @endcan 
-            
-            
-            @can('puestos.index')
-            <li class="nav-item">
-              <a href="{{ route('puestos.index') }}" class="nav-link">
-                <i class="fas fa-chalkboard-teacher nav-icon"></i>
-                <p>Asignacion Puesto</p>
-              </a>
-            </li>
-            @endcan 
-          <!--  @if(Auth::user()->can('empresas.index') || Auth::user()->can('departamentos.index') || Auth::user()->can('cargos.index'))
+          <!--  @if(Auth::user()->can('departamentos.index') || Auth::user()->can('cargos.index'))
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-building"></i>
@@ -133,15 +96,6 @@
               </a>
               <ul class="nav nav-treeview">
               
-                @can('empresas.index')
-                <li class="nav-item">
-                  <a href="{{ route('empresas.index') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Empresas</p>
-                  </a>
-                </li>
-                @endcan
-                
                 @can('departamentos.index')
                 <li class="nav-item">
                   <a href="{{ route('departamentos.index') }}" class="nav-link">
@@ -164,14 +118,14 @@
             </li>
             @endif-->
 
-            @can('clientes.index')
+           
           <!-- <li class="nav-item">
               <a href="{{ route('clientes.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>Campañas de clientes</p>
               </a>
             </li>-->
-            @endcan
+
 
           <!--  @can('clientes.campanias')
             <li class="nav-item">
@@ -190,62 +144,26 @@
               </a>
             </li>
             @endcan
-
-            
-            @can('procesos.index')
-            <li class="nav-item">
-              <a href="{{ route('procesos.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sync-alt"></i>
-                <strong><p>PROCESOS</p></strong>
-              </a>
-            </li>
-            @endcan
           
-            @can('operaciones.index')
+            @can('amortizacion.simulador')
             <li class="nav-item">
-              <a href="{{ route('operaciones.index') }}" class="nav-link">
-                <i class="nav-icon far fa-list-alt"></i>
-              <strong><p>OPERACIONES</p></strong> 
+              <a href="{{ route('amortizacion.simulador') }}" class="nav-link">
+                <i class="nav-icon fas fa-calculator"></i>
+                <p>Simulador</p>
               </a>
             </li>
             @endcan
 
-            @can('Asignaciones.index')
+          
+            <!-- @can('Asignaciones.index')
             <li class="nav-item">
               <a href="{{ route('Asignaciones.index') }}" class="nav-link">
                 <i class="nav-icon far fa-list-alt"></i>
               <strong><p>ASIGNACION CLIENTES</p></strong> 
               </a>
             </li>
-            @endcan
+            @endcan -->
 
-
-            @can('bandeja.index')
-            <li class="nav-item">
-                <a href="{{ route('bandeja.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>BANDEJA</p>
-                </a>
-              </li>
-          @endcan 
-
-          @can('agenda.index')
-          <li class="nav-item">
-              <a href="{{ route('agenda.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>MI AGENDA</p>
-              </a>
-            </li>
-        @endcan 
-
-        @can('agendar.index')
-        <li class="nav-item">
-            <a href="{{ route('agendar.create') }}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>AGENDAR</p>
-            </a>
-          </li>
-      @endcan 
           <!-- <li class="nav-item">
               <a href="pages/widgets.html" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
@@ -579,6 +497,5 @@
       @endif
     </div>
     <!-- /.sidebar -->
-   
+    
   </aside>
- 
