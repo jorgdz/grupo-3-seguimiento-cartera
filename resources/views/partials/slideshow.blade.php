@@ -30,7 +30,7 @@
                                     In enim justo, rhoncus ut,imperdiet a, venenatis vitae, justo. Nullam dictum felis
                                     eu pede mollis pretium. </span></p>
                             <p style="margin:0em 0em 0em 2.86em;line-height:2.11267605633803;"><br /></p>
-                            <p style="margin:0em 0em 0em 2.86em;line-height:2.11267605633803;"><span><a hred="#" target="_self" class="btn btn-md btn-success">ENTRAR</a></span>
+                            <p style="margin:0em 0em 0em 2.86em;line-height:2.11267605633803;"><span><a href="{{ route('login') }}" target="_self" class="btn btn-md btn-success">ENTRAR</a></span>
                             </p>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                     quis enim.Donec pede justo,fringilla vel, aliquet nec, vulputate eget, arcu. In enim
                                     justo, rhoncus ut,imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
                                     mollis pretium. </span></p>
-                            <p style="margin:0em 0em 0em 2.86em;line-height:2.43661971830986;"><span><a href="" target="_self" class="btn btn-md btn-info">ENTRAR</a></span></p>
+                            <p style="margin:0em 0em 0em 2.86em;line-height:2.43661971830986;"><span><a href="{{ route('login') }}" target="_self" class="btn btn-md btn-info">ENTRAR</a></span></p>
                         </div>
                     </div>
                 </div>
