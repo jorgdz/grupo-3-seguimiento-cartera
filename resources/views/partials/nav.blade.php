@@ -4,9 +4,7 @@
         </div>
         <div class="ttr_menushape1">
             <div class="html_content">
-                <p><span
-                        style="font-family:'Open Sans';font-weight:700;font-size:2.571em;color:rgba(200,49,66,1);">Business</span>
-                </p>
+                
             </div>
         </div>
         <div id="navigationmenu">
@@ -22,28 +20,24 @@
                     <span class="icon-bar">
                     </span>
                 </button>
-                <img class="ttr_menu_logo" src="/assets/landing/menulogo.png">
+                <img class="logo_landing" src="{{ asset('logo2.png') }}">
             </div>
             <div class="menu-center collapse navbar-collapse">
                 <ul class="ttr_menu_items nav navbar-nav navbar-right">
-                    <li class="ttr_menu_items_parent dropdown active"><a href="home.html"
-                            class="ttr_menu_items_parent_link_active"><span class="menuchildicon"></span>Home</a>
+                    <li class="ttr_menu_items_parent dropdown active"><a href="/"
+                            class="ttr_menu_items_parent_link_active" style="font-size:22px;"><span class="menuchildicon"></span>Home</a>
                         <hr class="horiz_separator" />
                     </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="about-us.html"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>About Us</a>
+                    <li class="ttr_menu_items_parent dropdown"><a href="#services"
+                            class="ttr_menu_items_parent_link" style="font-size:22px;"><span class="menuchildicon"></span>Servicios</a>
                         <hr class="horiz_separator" />
                     </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="services.html"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Services</a>
+                    <li class="ttr_menu_items_parent dropdown"><a href="#about"
+                            class="ttr_menu_items_parent_link" style="font-size:22px;"><span class="menuchildicon"></span>Acerca</a>
                         <hr class="horiz_separator" />
                     </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="our-work.html"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Our Work</a>
-                        <hr class="horiz_separator" />
-                    </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="contact-us.html"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Contact Us</a>
+                    <li class="ttr_menu_items_parent dropdown"><a href="#contact"
+                            class="ttr_menu_items_parent_link" style="font-size:22px;"><span class="menuchildicon"></span>Contacto</a>
                         <hr class="horiz_separator" />
                     </li>
                 </ul>

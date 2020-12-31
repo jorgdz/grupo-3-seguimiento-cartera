@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('title')</title>
 
-	<link rel="stylesheet"  href="{{ asset('assets/landing/bootstrap.css') }}" type="text/css" media="screen"/>
-	<link rel="stylesheet"  href="{{ asset('assets/landing/style.css') }}" type="text/css" media="screen"/>
-
+	<link rel="stylesheet" href="{{ asset('assets/landing/bootstrap.css') }}" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="{{ asset('assets/lte/plugins/fontawesome-free/css/all.min.css') }}">
 </head>
 <body class="Home">
 <div class="totopshow">
@@ -25,37 +25,37 @@
 
 <footer id="ttr_footer">
 	<div class="ttr_footerHome_html_row0 row">
-	<div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="ttr_footerHome_html_column00">
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">SAMPLE PAGE</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">About us</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Services</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Our Work</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Blog</span></p></div>
+	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.55em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">PAGINAS</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Acerca</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Servicios</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Contacto</span></p></div>
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
 	</div>
 	</div>
 	<div class="clearfix visible-xs-block">
 	</div>
-	<div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="ttr_footerHome_html_column01">
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">OUR SERVICES</span></p><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Lorem ipsum dolor </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Sit amet, consectetuer</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Adipiscing elit. Aenean </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Commodoligula eget </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Dolor.Aenean massa. </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Cum sociis natoque. </span></p></div>
+	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">NUESTROS SERVICIOS</span></p><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Calculadora de amortización </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Creación de plan de pago</span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Administración de personal  </span></p></div>
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
 	</div>
 	</div>
 	<div class="clearfix visible-sm-block visible-md-block visible-xs-block">
 	</div>
-	<div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="ttr_footerHome_html_column02">
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">OUR OFFERS</span></p><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Aenean vulputate eleifend tellus. </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Aenean leo ligula, porttitor eu, </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Consequat vitae, eleifend ac, enim. </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Aliquam lorem ante, dapibusin, </span></p><p style="margin:0em 0em 0em 4.29em;line-height:1.76056338028169;"><span style="font-family:'Open Sans';font-size:1em;color:rgba(255,255,255,1);">Viverra quis, feugiat a, tellus.</span></p></div>
+	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">CONTACTO</span></p><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">Guayaquil, Tungurahua 519 9 De Octubre</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">ECUADOR.</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">TELEFONO: (+593) 4-500-1821</span></p></div>
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
 	</div>
 	</div>
 	<div class="clearfix visible-xs-block">
 	</div>
-	<div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="post_column">
 	<div class="ttr_footerHome_html_column03">
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-	<div class="html_content"><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-weight:700;font-size:1.714em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-size:1.286em;color:rgba(255,255,255,1);">CONTACT US</span></p><p style="margin:0em 0em 0em 4.29em;"><br style="font-family:'Open Sans';font-size:1.143em;color:rgba(255,255,255,1);" /></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">1235, New Park Road</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">First Street, NEWYORK</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">USA.</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">TELEPHONE: + 1800 235 6200</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">FAX: + 1800 215 2000</span></p><p style="margin:0em 0em 0em 4.29em;"><span style="font-family:'Open Sans';font-weight:700;font-size:1em;color:rgba(255,255,255,1);">EMAIL: Info@business.com</span></p></div>
+	
 	<div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
 	</div>
 	</div>
@@ -64,15 +64,13 @@
 	</div>
 	<div class="ttr_footer_bottom_footer">
 	<div class="ttr_footer_bottom_footer_inner">
-	<div class="ttr_footershape1">
-	<div class="html_content"><p style="text-align:Center;line-height:1.54929577464789;"><span style="font-family:'Open Sans';color:rgba(255,255,255,1);">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodoligula eget dolor.Aenean massa. Cum sociis natoque. penatibus et magnis dis parturient montes,nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,pretium quis, sem.</span></p></div>
-	</div>
+	
 	<div id="ttr_footer_designed_by_links">
-	<a href="http://templatetoaster.com" target="_self" >
-	Website
-	</a>
-	<span id="ttr_footer_designed_by">
-	Designed With TemplateToaster
+		<a href="http://templatetoaster.com" target="_self" >
+		Desarrollado por
+		</a>
+		<span id="ttr_footer_designed_by">
+		estudiante del ISTB
 	</span>
 	</div>
 	</div>
