@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\Models\Admin\Cargo;
-use App\Models\Admin\DepartamentoEmpresa;
+use App\Models\Admin\Departamento;
 
 class CargoDepartamento extends Model
 {
     protected $table = 'cargo_departamentos';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['user_id', 'cargo_id', 'deptempresa_id'];
+    protected $fillable = ['user_id', 'cargo_id', 'departamento_id'];
 
     public function user()
     {
@@ -25,11 +25,10 @@ class CargoDepartamento extends Model
     	return $this->belongsTo(Cargo::class, 'cargo_id');
     }
 
-    public function departamentoEmpresa()
+    public function departamento()
     {
-    	return $this->belongsTo(DepartamentoEmpresa::class, 'deptempresa_id');
+    	return $this->belongsTo(Departamento::class, 'departamento_id');
     }
-
 
     public function scopeSearchWhere($query, $column, $operator = null, $search = null)
     {

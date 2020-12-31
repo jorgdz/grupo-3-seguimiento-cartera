@@ -22,8 +22,8 @@ class CreateCargoDepartamentosTable extends Migration
             $table->integer('cargo_id')->unsigned();
             $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
 
-            $table->integer('deptempresa_id')->unsigned();
-            $table->foreign('deptempresa_id')->references('id')->on('departamento_empresas')->onDelete('cascade');
+            $table->integer('departamento_id')->unsigned();
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
         });
     }
 

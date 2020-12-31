@@ -2053,15 +2053,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       clientes: [],
-      cedula: '',
+      cedula: "",
       page: 0,
-      //url: '/api/clientes'
-      url: 'http://192.168.1.107/ventas/public/apiclientes'
+      url: "/api/clientes"
     };
   },
   methods: {
@@ -2069,8 +2076,8 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "?page=1")) //axios.get(`${me.url}`)
       .then(function (res) {
-        me.clientes = res.data.data; //me.clientes = res.data
-
+        //me.clientes = res.data.data;
+        me.clientes = res.data;
         me.page = res.data.current_page;
         console.log(me.page);
       })["catch"](function (err) {
@@ -2090,7 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
     lastPage: function lastPage() {
       var me = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "?page=") + (me.page - 1)).then(function (res) {
-        console.log('Pagina:' + me.page);
+        console.log("Pagina:" + me.page);
         me.clientes = res.data.data;
         me.page = res.data.current_page;
         console.log(me.page);
@@ -2101,7 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
     nextPage: function nextPage() {
       var me = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "?page=") + (me.page + 1)).then(function (res) {
-        console.log('Pagina:' + me.page);
+        console.log("Pagina:" + me.page);
         me.clientes = res.data.data;
         me.page = res.data.current_page;
         console.log(me.page);
@@ -2111,7 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Componente cliente montado.');
+    console.log("Componente cliente montado.");
     this.getClientes();
   }
 });
@@ -2294,22 +2301,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id'],
+  props: ["id"],
   data: function data() {
     return {
       idcampana: String(this.id),
       cliente: {},
       pagos: [],
-      url: 'http://192.168.1.107/ventas/public/',
+      url: "http://192.168.1.107/ventas/public/",
       abono: 0.0,
       periodo: 0,
       interes: 0.0,
-      fecha_pago: '',
+      fecha_pago: "",
       cuota: 0.0,
       errorMostrarMsgPago: [],
       errorPago: 0,
@@ -2343,7 +2449,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     nuevaFecha: function nuevaFecha(fecha, intervalo, dma) {
-      var arrayFecha = fecha.split('-');
+      var arrayFecha = fecha.split("-");
       var anio = arrayFecha[0];
       var mes = arrayFecha[1];
       var dia = arrayFecha[2];
@@ -2368,7 +2474,7 @@ __webpack_require__.r(__webpack_exports__);
       return anio + "-" + mes + "-" + dia;
     },
     formatDate: function formatDate(date) {
-      var arrayFecha = date.split('-');
+      var arrayFecha = date.split("-");
       var year = arrayFecha[0];
       var month = arrayFecha[1];
       var day = arrayFecha[2];
@@ -2377,7 +2483,7 @@ __webpack_require__.r(__webpack_exports__);
       var dia = fecha.getDate();
       var mesIndice = fecha.getMonth();
       var anio = fecha.getFullYear();
-      return dia + '/' + meses[mesIndice] + '/' + anio;
+      return dia + "/" + meses[mesIndice] + "/" + anio;
     },
     calculate: function calculate() {
       if (this.validate()) {
@@ -2386,7 +2492,7 @@ __webpack_require__.r(__webpack_exports__);
         var me = this;
 
         if (me.cliente.SaldoDeuda < 0.1) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Error', 'El cliente no tiene deuda para crear un plan de pago', 'error');
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", "El cliente no tiene deuda para crear un plan de pago", "error");
         } else {
           me.amortizar = true;
           me.arrayData = [];
@@ -2409,7 +2515,7 @@ __webpack_require__.r(__webpack_exports__);
               cuota: cuota_fija,
               interes: intereses,
               abono: amortizacion,
-              fecha_pago: me.formatDate(me.nuevaFecha(me.fecha_pago, '+' + i, 'm')),
+              fecha_pago: me.formatDate(me.nuevaFecha(me.fecha_pago, "+" + i, "m")),
               saldo_final: saldo_final < 0.1 ? 0 : saldo_final
             };
             me.arrayData.push(object);
@@ -2421,7 +2527,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     donwloadPdf: function donwloadPdf() {
       var me = this;
-      var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2___default.a('p', 'pt');
+      var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2___default.a("p", "pt");
       var columns = [{
         title: "# Periodos",
         dataKey: "id"
@@ -2444,9 +2550,9 @@ __webpack_require__.r(__webpack_exports__);
         title: "Saldo final",
         dataKey: "saldo_final"
       }];
-      doc.text('Amortización del cliente ' + me.cliente.Nombres, 10, 18);
+      doc.text("Amortización del cliente " + me.cliente.Nombres, 10, 18);
       doc.autoTable(columns, me.arrayData);
-      doc.save('amortizacion-' + (me.cliente.IdCampaña + me.cliente.Identificacion) + '.pdf');
+      doc.save("amortizacion-" + (me.cliente.IdCampaña + me.cliente.Identificacion) + ".pdf");
     },
     postPago: function postPago() {
       if (this.validate()) {
@@ -2455,28 +2561,28 @@ __webpack_require__.r(__webpack_exports__);
         var me = this;
 
         if (me.cliente.SaldoDeuda < 0.1) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Error', 'El cliente no tiene deuda para crear un plan de pago', 'error');
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", "El cliente no tiene deuda para crear un plan de pago", "error");
         } else {
           var monto_cobrar = parseFloat(me.cliente.SaldoDeuda) - parseFloat(me.abono);
           var interesDecimal = parseFloat(me.interes) / 100;
           var denominador = Math.pow(1 / (1 + parseFloat(interesDecimal)), parseFloat(me.periodo));
           var cuota = parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador));
           axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/apipago/store", {
-            'campania_idc': me.cliente.IdCampaña + me.cliente.Identificacion,
-            'periodo': me.periodo,
-            'interes': me.interes,
-            'cuota': cuota,
-            'abono': me.abono,
-            'fecha_pago': me.fecha_pago,
-            'monto_cobrar': monto_cobrar,
-            'nombres': me.cliente.Nombres,
-            'saldoDeuda': me.cliente.SaldoDeuda,
-            'valorDeuda': me.cliente.ValorDeuda,
-            'campania': me.cliente.Descripcion
+            campania_idc: me.cliente.IdCampaña + me.cliente.Identificacion,
+            periodo: me.periodo,
+            interes: me.interes,
+            cuota: cuota,
+            abono: me.abono,
+            fecha_pago: me.fecha_pago,
+            monto_cobrar: monto_cobrar,
+            nombres: me.cliente.Nombres,
+            saldoDeuda: me.cliente.SaldoDeuda,
+            valorDeuda: me.cliente.ValorDeuda,
+            campania: me.cliente.Descripcion
           }).then(function (res) {
             me.getPagos();
             me.amortizar = false;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Correcto', res.data.success, 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Correcto", res.data.success, "success");
             me.resetError();
             me.reset();
             monto_cobrar = 0.0;
@@ -2488,7 +2594,7 @@ __webpack_require__.r(__webpack_exports__);
             monto_cobrar = 0.0;
             interesDecimal = 0.0;
             cuota = 0.0;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Error', err.response.data, 'error');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", err.response.data, "error");
           });
         }
       }
@@ -2497,36 +2603,36 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
-        title: '¿Seguro que quieres eliminar el pago?',
+        title: "¿Seguro que quieres eliminar el pago?",
         text: "No podrás revertir esta acción luego",
-        type: 'warning',
+        type: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, borrarlo!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Si, borrarlo!"
       }).then(function (result) {
         if (result.value) {
           var me = _this;
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/apipago/' + id).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/apipago/" + id).then(function (res) {
             me.getPagos();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Borrarlo!', 'Pago eliminado.', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Borrarlo!", "Pago eliminado.", "success");
           })["catch"](function (err) {
             console.log(err);
             var error = err.response.data;
 
-            if (err.response.data == 'Unauthorized.') {
-              error = 'Usuario con rol no autorizado';
+            if (err.response.data == "Unauthorized.") {
+              error = "Usuario con rol no autorizado";
             }
 
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()('Error', error, 'error');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", error, "error");
           });
         }
       });
     },
     validarAbonoNumerico: function validarAbonoNumerico() {
-      var out = '';
-      var filtro = '1234567890.';
+      var out = "";
+      var filtro = "1234567890.";
 
       for (var i = 0; i < this.abono.length; i++) {
         if (filtro.indexOf(this.abono.charAt(i)) != -1) out += this.abono.charAt(i);
@@ -2535,8 +2641,8 @@ __webpack_require__.r(__webpack_exports__);
       this.abono = out;
     },
     validarCuotaNumerico: function validarCuotaNumerico() {
-      var out = '';
-      var filtro = '1234567890.';
+      var out = "";
+      var filtro = "1234567890.";
 
       for (var i = 0; i < this.cuota.length; i++) {
         if (filtro.indexOf(this.cuota.charAt(i)) != -1) out += this.cuota.charAt(i);
@@ -2545,8 +2651,8 @@ __webpack_require__.r(__webpack_exports__);
       this.cuota = out;
     },
     validarInteresNumerico: function validarInteresNumerico() {
-      var out = '';
-      var filtro = '1234567890.';
+      var out = "";
+      var filtro = "1234567890.";
 
       for (var i = 0; i < this.interes.length; i++) {
         if (filtro.indexOf(this.interes.charAt(i)) != -1) out += this.interes.charAt(i);
@@ -2560,7 +2666,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     reset: function reset() {
       var me = this;
-      me.fecha_pago = '';
+      me.fecha_pago = "";
       me.periodo = 0;
       me.abono = 0.0;
       me.interes = 0.0;
@@ -2572,7 +2678,7 @@ __webpack_require__.r(__webpack_exports__);
       this.errorPago = 0;
       this.errorMostrarMsgPago = [];
       if (!this.abono || this.abono < 0) this.errorMostrarMsgPago.push("El abono no puede estar vacío");
-      if (!this.periodo || this.periodo <= 0 || this.periodo == 'Infinity') this.errorMostrarMsgPago.push("El periodo no puede estar vacío");
+      if (!this.periodo || this.periodo <= 0 || this.periodo == "Infinity") this.errorMostrarMsgPago.push("El periodo no puede estar vacío");
       if (!this.cuota || this.cuota <= 0) this.errorMostrarMsgPago.push("Debe especificar la cuota");
       if (!this.interes || this.interes <= 0) this.errorMostrarMsgPago.push("El interés no puede estar vacío ni ser menor o igual a 0");
       if (!this.fecha_pago) this.errorMostrarMsgPago.push("La fecha de pago no puede estar vacío");
@@ -2581,7 +2687,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Componente pagos montado.');
+    console.log("Componente pagos montado.");
     this.getCampanaCliente();
     this.getPagos();
   }
@@ -43207,7 +43313,7 @@ var render = function() {
               attrs: { type: "submit" },
               on: { click: _vm.search }
             },
-            [_vm._v("Buscar")]
+            [_vm._v("\n                    Buscar\n                ")]
           )
         ])
       ])
@@ -43230,7 +43336,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "table",
-        { staticClass: "table table-bordered table-hover table-striped " },
+        { staticClass: "table table-bordered table-hover table-striped" },
         [
           _vm._m(0),
           _vm._v(" "),
@@ -43332,21 +43438,25 @@ var render = function() {
         _c("div", { staticClass: "col-lg-3" }, [
           _c("span", [
             _c("strong", [_vm._v("Identificación:")]),
-            _vm._v(" " + _vm._s(_vm.cliente.Identificacion) + " ")
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.cliente.Identificacion) +
+                "\n                "
+            )
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-3" }, [
           _c("span", [
             _c("strong", [_vm._v("Cliente:")]),
-            _vm._v(" " + _vm._s(_vm.cliente.Nombres) + " ")
+            _vm._v(" " + _vm._s(_vm.cliente.Nombres) + "\n                ")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-3" }, [
           _c("span", [
             _c("strong", [_vm._v("Dirección:")]),
-            _vm._v(" " + _vm._s(_vm.cliente.direccion) + " ")
+            _vm._v(" " + _vm._s(_vm.cliente.direccion) + "\n                ")
           ])
         ])
       ]),
@@ -43361,21 +43471,27 @@ var render = function() {
           _c("div", { staticClass: "col-lg-3" }, [
             _c("span", [
               _c("strong", [_vm._v("Campaña:")]),
-              _vm._v(" " + _vm._s(_vm.cliente.Descripcion) + " ")
+              _vm._v(
+                " " + _vm._s(_vm.cliente.Descripcion) + "\n                "
+              )
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3" }, [
             _c("span", [
               _c("strong", [_vm._v("Deuda:")]),
-              _vm._v(" " + _vm._s(_vm.cliente.ValorDeuda) + " ")
+              _vm._v(
+                " " + _vm._s(_vm.cliente.ValorDeuda) + "\n                "
+              )
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3" }, [
             _c("span", [
               _c("strong", [_vm._v("Saldo:")]),
-              _vm._v(" " + _vm._s(_vm.cliente.SaldoDeuda) + " ")
+              _vm._v(
+                " " + _vm._s(_vm.cliente.SaldoDeuda) + "\n                "
+              )
             ])
           ])
         ]
@@ -43411,7 +43527,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("×")]
+                    [_vm._v("\n                    ×\n                ")]
                   ),
                   _vm._v(" "),
                   _vm._m(0),
@@ -43509,7 +43625,7 @@ var render = function() {
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "" } }, [
                         _vm._v(
-                          "Pago realizados a un plazo de " +
+                          "Pago realizados a un plazo de\n                            " +
                             _vm._s(_vm.calcularPeriodo) +
                             " mes(es)"
                         )
@@ -43594,7 +43710,11 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.calculate }
               },
-              [_vm._v("Calcular amortización")]
+              [
+                _vm._v(
+                  "\n                    Calcular amortización\n                "
+                )
+              ]
             ),
             _vm._v(" "),
             _c(
@@ -43604,7 +43724,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.reset }
               },
-              [_vm._v("Nuevo")]
+              [_vm._v("\n                    Nuevo\n                ")]
             ),
             _vm._v(" "),
             _c(
@@ -43614,7 +43734,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.postPago }
               },
-              [_vm._v("Enviar")]
+              [_vm._v("\n                    Enviar\n                ")]
             )
           ])
         ]),
@@ -43632,7 +43752,11 @@ var render = function() {
                         attrs: { type: "button" },
                         on: { click: _vm.donwloadPdf }
                       },
-                      [_vm._v("Descargar tabla")]
+                      [
+                        _vm._v(
+                          "\n                            Descargar tabla\n                        "
+                        )
+                      ]
                     )
                   ])
                 ])
@@ -43755,7 +43879,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h5", [
       _c("i", { staticClass: "icon fas fa-exclamation-triangle" }),
-      _vm._v("Error")
+      _vm._v("Error\n                ")
     ])
   },
   function() {
@@ -56275,8 +56399,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\admin\Documents\damplus\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\admin\Documents\damplus\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\jdzm\Documents\PHP\damplus\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\jdzm\Documents\PHP\damplus\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

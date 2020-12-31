@@ -8,10 +8,12 @@ use App\User;
 
 class PerfilController extends Controller
 {
+    private $storage;
+    private $bucket;
 
     public function __construct()
 	{
-		$this->middleware('auth');
+        $this->middleware('auth');
 	} 
    
     /**
@@ -20,8 +22,7 @@ class PerfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
-    {
+    public function edit() {
         $perfil = \Auth::user();
         return view('users.profile', ['user' => $perfil]);
     }
@@ -38,7 +39,7 @@ class PerfilController extends Controller
         //DD($request);
         $validate = \Validator::make($request->all(), [          
             'cedula' => ['required','ecuador:ci','unique:users,cedula,'.\Auth::user()->id],
-           'nombre1' => 'required',
+            'nombre1' => 'required',
             'nombre2' => 'required',
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
@@ -46,8 +47,6 @@ class PerfilController extends Controller
             'celular' => ['required','unique:users,celular,'.$user->id],
             'estado_civil' => 'required',
             'email' => 'required',
-            'extension' => 'required',
-            'discapacidad' => 'required',
             'fecha_nacimiento' => 'required|date_format:"Y-m-d"'
         ]);
  
@@ -72,14 +71,12 @@ class PerfilController extends Controller
             $user->password = bcrypt($request->password);
         }
 
-        $user->discapacidad = $request->discapacidad;
-        $user->comentario = $request->comentario;
-        $user->extension = $request->extension;
         $user->fecha_nacimiento = $request->fecha_nacimiento;
 
         if (Input::hasFile('foto')) {
             $file = Input::file('foto');
             $file->move(public_path().'/fotos/',$file->getClientOriginalName());
+            
             $user->foto = $file->getClientOriginalName();
         }
         
@@ -89,5 +86,4 @@ class PerfilController extends Controller
 
         return redirect()->route('perfil.edit', $user->id)->with('msg', 'Tus datos han sido actualizado !!');
     }
-
 }

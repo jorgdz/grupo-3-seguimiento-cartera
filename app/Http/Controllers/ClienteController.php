@@ -20,15 +20,15 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {
-        $detalleCampanias = DetalleCampania::with('cliente')
-            ->with('campania')
-            ->with('pagos')
-            ->with('pagos.detallePagos')
-            ->cedulaCliente($request->get('cedula'))
-            ->orderBy('id', 'desc')
-            ->paginate(50);
+        // $detalleCampanias = DetalleCampania::with('cliente')
+        //     ->with('campania')
+        //     ->with('pagos')
+        //     ->with('pagos.detallePagos')
+        //     ->cedulaCliente($request->get('cedula'))
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(50);
 
-        return view ('clientes.index', ['detalleCampanias' => $detalleCampanias]);
+        return view ('clientes.index');
     }
 
 
@@ -42,7 +42,6 @@ class ClienteController extends Controller
     {
         return view ('clientes.clientes');
     }
-
 
 
     /**

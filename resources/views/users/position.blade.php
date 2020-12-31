@@ -61,17 +61,6 @@
 
                 {!! Form::model($user, ['route' => ['users.assign', $user->id], 'method' => 'PUT']) !!}
                     <div class="form-group">
-                        {{ Form::label('empresa_id', 'Seleccione una empresa') }}
-                        <select name="empresa_id" id="empresa_id" class="form-control" onchange="getdepartamentos(this.value)">
-                                <option value="0">Seleccione una empresa</option>
-                            @foreach($empresas as $empresa)
-                                <option value="{{ $empresa->id }}">{{ $empresa->nombre_empresa }}</option>    
-                            @endforeach()
-                        </select>
-                    </div>   
-
-                    <div class="form-group">
-                
                         {{ Form::label('departamento', 'Departamento') }}
                         {!! Form::select('departamento', $departamento->pluck('nombre_departamento', 'id'), null, ['class' => 'form-control']) !!}
                     </div>   
@@ -83,9 +72,9 @@
                     <div class="card-footer">
                         {{ Form::submit('Enviar', ['class' => 'btn btn-sm btn-primary']) }}
                     </div>
+                {!! Form::close() !!}
                 </div>
 
-                {!! Form::close() !!}
 
             </div>
         </div>

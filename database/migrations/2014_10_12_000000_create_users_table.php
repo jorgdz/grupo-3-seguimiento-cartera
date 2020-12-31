@@ -27,9 +27,7 @@ class CreateUsersTable extends Migration
             $table->text('foto')->nullable();
             $table->date('fecha_nacimiento');
             $table->string('email')->nullable();
-            $table->boolean('discapacidad')->default(0);
-            $table->text('comentario')->nullable();
-            $table->string('extension')->nullable();
+            $table->string('campania')->nullable();
             $table->boolean('enabled');
             $table->boolean('perfil_actualizado');
 

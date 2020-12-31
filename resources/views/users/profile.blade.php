@@ -82,7 +82,9 @@
                                 {{ Form::label('direccion', 'Dirección(*)') }}
                                 {{ Form::text('direccion', null, ['placeholder'=>'Dirección domiciliaria', 'class' => 'form-control']) }}
                             </div> 
+                        </div>
 
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 {{ Form::label('celular', 'Celular(*)') }}
                                 {{ Form::text('celular', null, ['placeholder' => 'Celular del usuario', 'class' => 'form-control']) }}
@@ -97,10 +99,6 @@
                                 {{ Form::label('estado_civil', 'Estado civil(*)') }}
                                 {!! Form::select('estado_civil', [null => 'Seleccione estado civil'] + ['Soltero' => 'Soltero','Casado'=>'Casado','Viudo'=>'Viudo','Divorciado'=>'Divorciado', 'Unido'=>'Unido'], null, ['class' => 'form-control']) !!}
                             </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
                             <div class="form-group">
                                 {{ Form::label('email', 'Correo del usuario(*)') }}
                                 {{ Form::email('email', null, ['placeholder'=>'Correo', 'class' => 'form-control']) }}
@@ -110,22 +108,8 @@
                                 {{ Form::label('password', 'Contraseña') }}
                                 {{ Form::password('password', array('class' => 'form-control','placeholder' => 'Su contraseña')) }}
                             </div> 
-
-                            <div class="form-group">
-                                <label id="si">{{ Form::radio('discapacidad', '1') }} Posee alguna discapacidad</label> &nbsp; &nbsp; &nbsp;
-                                <label id="no">{{ Form::radio('discapacidad', '0', ['checked']) }} No posee ninguna discapacidad</label>
-                            </div>
-
-                            <div class="form-group" id="discapacidad">
-                                {{ Form::label('comentario', 'Comente su discapacidad en caso de poseer alguna') }}
-                                {{ Form::textarea('comentario', null, ['class' => 'form-control']) }}
-                            </div>
+         
                             
-                            <div class="form-group">
-                                {{ Form::label('extension', 'Extension(*)') }}
-                                {{ Form::text('extension', null, ['placeholder' => 'Extension', 'class' => 'form-control']) }}
-                            </div> 
-
                             <div class="form-group">
                                 {{ Form::label('fecha_nacimiento', 'Fecha de nacimiento(*)') }}
                                 {{ Form::date('fecha_nacimiento', null, ['class' => 'form-control']) }}

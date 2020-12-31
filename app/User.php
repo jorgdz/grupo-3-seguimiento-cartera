@@ -32,7 +32,7 @@ class User extends Authenticatable
     //protected $remember_token = false;
     protected $table = 'users';
     protected $primaryKey = 'id';
-    protected $fillable = ['cedula','nombre1', 'nombre2', 'apellido_paterno', 'apellido_materno', 'direccion', 'celular', 'genero_id', 'telefono', 'foto', 'estado_civil', 'email', 'discapacidad', 'comentario', 'extension', 'usuario', 'password', 'perfil_actualizado', 'enabled', 'created_at', 'updated_at', 'fecha_nacimiento'];
+    protected $fillable = ['cedula','nombre1', 'nombre2', 'apellido_paterno', 'apellido_materno', 'direccion', 'celular', 'genero_id', 'telefono', 'foto', 'estado_civil', 'email', 'campania', 'usuario', 'password', 'perfil_actualizado', 'enabled', 'created_at', 'updated_at', 'fecha_nacimiento'];
     
     protected $guarded = ['id'];
 
@@ -81,8 +81,6 @@ class User extends Authenticatable
     }
 
 
-
-
     /*
         Pagos solo porque tengo el servicio rest de campañas clientes
     */
@@ -90,30 +88,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pago::class, 'user_id');
     }
+
     public function detallePagos ()
     {
         return $this->hasMany(DetallePago::class, 'user_id');
     }
 
-
-
-
-
-
-
-
-
-
-
-    public function genero()
+    public function genero ()
     {
         return $this->belongsTo(Genero::class, 'genero_id');
     } 
 
-
-    
-    /*
-        Get age
+    /**
+    * Get age
     */
     public function edad () 
     {
@@ -121,10 +108,8 @@ class User extends Authenticatable
         return $edad;
     }
 
-
-
     /**
-        Scopes
+    * Scopes
     */
     public function scopeSearchWhere($query, $column, $operator = null, $search = null)
     {

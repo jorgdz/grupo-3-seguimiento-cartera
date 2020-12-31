@@ -79,8 +79,10 @@
                             <div class="form-group">
                                 {{ Form::label('telefono', 'Teléfono del usuario') }}
                                 {{ Form::text('telefono', null, ['placeholder'=>'Teléfono convencional', 'class' => 'form-control']) }}
-                            </div>
-                            
+                            </div>             
+                        </div>
+
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 {{ Form::label('genero_id', 'Genero') }}
                                 {!! Form::select('genero_id', $generos->pluck('nombre_genero', 'id'), null, ['class' => 'form-control']) !!}
@@ -90,29 +92,16 @@
                                 {{ Form::label('estado_civil', 'Estado civil') }}
                                 {!! Form::select('estado_civil', [null => 'Seleccione estado civil'] + ['Soltero' => 'Soltero','Casado'=>'Casado','Viudo'=>'Viudo','Divorciado'=>'Divorciado', 'Unido'=>'Unido'], null, ['class' => 'form-control']) !!}
                             </div>
-                        </div>
-
-                        <div class="col-lg-6">
 
                             <div class="form-group">
                                 {{ Form::label('email', 'Correo del usuario') }}
                                 {{ Form::email('email', null, ['placeholder'=>'Correo', 'class' => 'form-control']) }}
                             </div> 
-
+                                                      
                             <div class="form-group">
-                                <label id="si">{{ Form::radio('discapacidad', '1') }} Posee alguna discapacidad</label> &nbsp; &nbsp; &nbsp;
-                                <label id="no">{{ Form::radio('discapacidad', '0', ['checked']) }} No posee ninguna discapacidad</label>
+                                {{ Form::label('campania', 'Campaña') }}
+                                {!! Form::select('campania', $campanias->pluck('nombre', 'nombre'), null, ['class' => 'form-control']) !!}
                             </div>
-
-                            <div class="form-group" id="discapacidad">
-                                {{ Form::label('comentario', 'Comentar la discapacidad del usuario') }}
-                                {{ Form::textarea('comentario', null, ['class' => 'form-control']) }}
-                            </div>
-                            
-                            <div class="form-group">
-                                {{ Form::label('extension', 'Extension') }}
-                                {{ Form::text('extension', null, ['placeholder' => 'Extension', 'class' => 'form-control']) }}
-                            </div> 
 
                             <div class="form-group">
                                 {{ Form::label('enabled', 'Estado') }}

@@ -50,7 +50,6 @@
                                             <th>#</th>
                                             <th>Cargo</th>
                                             <th>Departamento</th>
-                                            <th>Empresa</th>
                                             @if(Auth::user()->can('cargosdepartamento.destroy'))
                                                 <th>Acciones</th>
                                             @endif
@@ -62,8 +61,7 @@
                                               <tr>
                                                 <td>{{ ($key + 1) }}</td>
                                                 <td>{{ $cargoDep->cargo->nombre_cargo }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->departamento->nombre_departamento }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->empresa->nombre_empresa }}</td>    
+                                                <td>{{ $cargoDep->departamento->nombre_departamento }}</td>                               
                                                 @can('cargosdepartamento.destroy')
                                                     <td>    
                                                         {!! Form::open(['route' => ['cargosdepartamento.destroy', $cargoDep->id], 'method' => 'DELETE']) !!}
