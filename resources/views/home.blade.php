@@ -69,6 +69,10 @@
                                 @endif
                             </div>
                         </ul>
+                        @if($user->campania)
+                            <hr>
+                            <h5><strong>Campaña:</strong> {{ $user->campania }}</h5>
+                        @endif
                     @else
                         <h3><em>Por favor usuario, actualice sus datos antes de empezar a trabajar, <a href="{{route('perfil.edit')}}">Ir a mi perfil.</a></em></h3>
                     @endif

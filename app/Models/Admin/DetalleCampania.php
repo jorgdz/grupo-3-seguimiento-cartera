@@ -9,7 +9,7 @@ use App\Models\Admin\Pago;
 
 class DetalleCampania extends Model
 {
-    //protected $table = "detalle_campanias";
+    protected $table = "detalle_campanias";
     protected $fillable = ['cliente_id', 'campania_id', 'valor_saldo', 'valor_deuda', 'fecha'];
     protected $primaryKey = 'id';
     public $timestamps = false;
@@ -29,14 +29,19 @@ class DetalleCampania extends Model
         return $this->hasMany(Pago::class, 'detalle_campania_id');
     }*/
 
-    public function scopeCedulaCliente($query, $cedula)
-    {
+    public function scopeCedulaCliente($query, $cedula) {
         if (trim($cedula) != "") 
         {
             $query->whereHas('cliente', function($q) use ($cedula){
-                $q->where('cedula', '=', $cedula);
+                $q->where('Identificacion', '=', $cedula);
             });
         }
+    }
+    
+    public function scopeNombreCampania($query, $campania) {  
+        $query->whereHas('campania', function($q) use ($campania){
+            $q->where('nombre_campania', '=', $campania);
+        });
     }
 
 }

@@ -1838,6 +1838,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var number_precision__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! number-precision */ "./node_modules/number-precision/build/index.es.js");
 //
 //
 //
@@ -1918,6 +1919,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1925,7 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
       abono: 0.0,
       monto: 0.0,
       interes: 0.0,
-      fecha: '',
+      fecha: "",
       periodos: 0,
       arrayData: []
     };
@@ -1934,7 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
     calcularPeriodo: function calcularPeriodo() {
       var me = this;
       me.periodos = Math.round((parseFloat(me.saldo_deuda) - parseFloat(me.abono)) / parseFloat(me.monto));
-      return Math.round(me.periodos);
+      return number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(me.periodos, 0);
     }
   },
   methods: {
@@ -1942,18 +1989,19 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       me.arrayData = [];
       var object = {};
-      var monto_cobrar = parseFloat(me.saldo_deuda) - parseFloat(me.abono);
+      var monto_cobrar = number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(parseFloat(me.saldo_deuda) - parseFloat(me.abono), 3);
       var interesDecimal = parseFloat(me.interes) / 100;
       var denominador = Math.pow(1 / (1 + parseFloat(interesDecimal)), parseFloat(me.periodos));
-      var cuota_fija = parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador));
+      var tmpCuotaFija = parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador));
+      var cuota_fija = number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(tmpCuotaFija, 3);
       var intereses = 0.0;
       var amortizacion = 0.0;
       var saldo_final = 0.0;
 
       for (var i = 1; i <= me.periodos; i++) {
-        intereses = parseFloat(monto_cobrar) * parseFloat(me.interes / 100);
-        amortizacion = parseFloat(cuota_fija) - parseFloat(intereses);
-        saldo_final = parseFloat(monto_cobrar) - parseFloat(amortizacion);
+        intereses = number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(parseFloat(monto_cobrar) * parseFloat(me.interes / 100), 3);
+        amortizacion = number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(parseFloat(cuota_fija) - parseFloat(intereses), 3);
+        saldo_final = number_precision__WEBPACK_IMPORTED_MODULE_0__["default"].round(parseFloat(monto_cobrar) - parseFloat(amortizacion), 3);
         object = {
           id: i,
           saldo_inicial: monto_cobrar,
@@ -1973,13 +2021,13 @@ __webpack_require__.r(__webpack_exports__);
       me.abono = 0.0;
       me.monto = 0.0;
       me.interes = 0.0;
-      me.fecha = '';
+      me.fecha = "";
       me.periodos = 0;
       me.arrayData = [];
     }
   },
   mounted: function mounted() {
-    console.log('Componente de amortizaciones montado.');
+    console.log("Componente de amortizaciones montado.");
   }
 });
 
@@ -2061,6 +2109,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2076,8 +2130,8 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "?page=1")) //axios.get(`${me.url}`)
       .then(function (res) {
-        //me.clientes = res.data.data;
-        me.clientes = res.data;
+        me.clientes = res.data.data; //me.clientes = res.data;
+
         me.page = res.data.current_page;
         console.log(me.page);
       })["catch"](function (err) {
@@ -2125,6 +2179,101 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      pagos: []
+    };
+  },
+  methods: {
+    getPagos: function getPagos() {
+      var me = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/pagos").then(function (res) {
+        me.pagos = res.data;
+      })["catch"](function (err) {
+        console.error(err.message);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    console.log("Componente dashboard montado.");
+    setInterval(function () {
+      _this.getPagos();
+    }, 2000);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PagosComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PagosComponent.vue?vue&type=script&lang=js& ***!
@@ -2142,6 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
 /* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var number_precision__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! number-precision */ "./node_modules/number-precision/build/index.es.js");
 //
 //
 //
@@ -2400,6 +2550,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -2411,10 +2563,10 @@ __webpack_require__.r(__webpack_exports__);
       idcampana: String(this.id),
       cliente: {},
       pagos: [],
-      url: "http://192.168.1.107/ventas/public/",
+      url: "/",
       abono: 0.0,
       periodo: 0,
-      interes: 0.0,
+      interes: 5,
       fecha_pago: "",
       cuota: 0.0,
       errorMostrarMsgPago: [],
@@ -2426,14 +2578,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     calcularPeriodo: function calcularPeriodo() {
       var me = this;
-      me.periodo = Math.round((parseFloat(me.cliente.SaldoDeuda) - parseFloat(me.abono)) / parseFloat(me.cuota));
+      me.periodo = Math.round((parseFloat(me.cliente.valor_deuda) - parseFloat(me.abono)) / parseFloat(me.cuota));
       return Math.round(me.periodo);
     }
   },
   methods: {
     getCampanaCliente: function getCampanaCliente() {
       var me = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "apiclientes?id=").concat(me.idcampana)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(me.url, "api/campaigns/").concat(me.idcampana, "/clients")).then(function (res) {
         me.cliente = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -2491,26 +2643,27 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var me = this;
 
-        if (me.cliente.SaldoDeuda < 0.1) {
+        if (me.cliente.valor_saldo < 0.1) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", "El cliente no tiene deuda para crear un plan de pago", "error");
         } else {
           me.amortizar = true;
           me.arrayData = [];
           var object = {};
-          var monto_cobrar = Math.round(parseFloat(me.cliente.SaldoDeuda) - parseFloat(me.abono), 3);
+          var tmpMontoCobrar = parseFloat(me.cliente.valor_saldo) - parseFloat(me.abono);
+          var monto_cobrar = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(tmpMontoCobrar, 3);
           var interesDecimal = parseFloat(me.interes) / 100;
           var denominador = Math.pow(1 / (1 + parseFloat(interesDecimal)), parseFloat(me.periodo));
-          var cuota_fija = parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador));
+          var cuota_fija = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador)), 3);
           var intereses = 0.0;
           var amortizacion = 0.0;
           var saldo_final = 0.0;
 
-          for (var i = 1; i <= me.periodo; i++) {
-            intereses = parseFloat(monto_cobrar) * parseFloat(me.interes / 100);
-            amortizacion = parseFloat(cuota_fija) - parseFloat(intereses);
-            saldo_final = parseFloat(monto_cobrar) - parseFloat(amortizacion);
+          for (var i = 0; i < me.periodo; i++) {
+            intereses = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(parseFloat(monto_cobrar) * parseFloat(me.interes / 100), 3);
+            amortizacion = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(parseFloat(cuota_fija) - parseFloat(intereses), 3);
+            saldo_final = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(parseFloat(monto_cobrar) - parseFloat(amortizacion), 3);
             object = {
-              id: i,
+              id: i + 1,
               saldo_inicial: monto_cobrar,
               cuota: cuota_fija,
               interes: intereses,
@@ -2550,9 +2703,9 @@ __webpack_require__.r(__webpack_exports__);
         title: "Saldo final",
         dataKey: "saldo_final"
       }];
-      doc.text("Amortización del cliente " + me.cliente.Nombres, 10, 18);
+      doc.text("CLIENTE: " + me.cliente.cliente.Nombres + " " + me.cliente.cliente.Apellidos, 10, 18);
       doc.autoTable(columns, me.arrayData);
-      doc.save("amortizacion-" + (me.cliente.IdCampaña + me.cliente.Identificacion) + ".pdf");
+      doc.save("amortizacion-" + (me.cliente.campania.id + me.cliente.cliente.Identificacion) + ".pdf");
     },
     postPago: function postPago() {
       if (this.validate()) {
@@ -2560,25 +2713,25 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var me = this;
 
-        if (me.cliente.SaldoDeuda < 0.1) {
+        if (me.cliente.valor_saldo < 0.1) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", "El cliente no tiene deuda para crear un plan de pago", "error");
         } else {
-          var monto_cobrar = parseFloat(me.cliente.SaldoDeuda) - parseFloat(me.abono);
+          var monto_cobrar = parseFloat(me.cliente.valor_saldo) - parseFloat(me.abono);
           var interesDecimal = parseFloat(me.interes) / 100;
           var denominador = Math.pow(1 / (1 + parseFloat(interesDecimal)), parseFloat(me.periodo));
-          var cuota = parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador));
+          var cuota = number_precision__WEBPACK_IMPORTED_MODULE_4__["default"].round(parseFloat(interesDecimal) * parseFloat(monto_cobrar) / (1 - parseFloat(denominador)), 2);
           axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/apipago/store", {
-            campania_idc: me.cliente.IdCampaña + me.cliente.Identificacion,
+            campania_id: me.idcampana,
             periodo: me.periodo,
             interes: me.interes,
             cuota: cuota,
             abono: me.abono,
             fecha_pago: me.fecha_pago,
             monto_cobrar: monto_cobrar,
-            nombres: me.cliente.Nombres,
-            saldoDeuda: me.cliente.SaldoDeuda,
-            valorDeuda: me.cliente.ValorDeuda,
-            campania: me.cliente.Descripcion
+            nombres: me.cliente.cliente.Nombres + " " + me.cliente.cliente.Apellidos,
+            saldoDeuda: me.cliente.valor_saldo,
+            valorDeuda: me.cliente.valor_deuda,
+            campania: me.cliente.campania.nombre_campania
           }).then(function (res) {
             me.getPagos();
             me.amortizar = false;
@@ -2594,7 +2747,7 @@ __webpack_require__.r(__webpack_exports__);
             monto_cobrar = 0.0;
             interesDecimal = 0.0;
             cuota = 0.0;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", err.response.data, "error");
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", err.response.data.data, "error");
           });
         }
       }
@@ -37163,6 +37316,216 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
 
 /***/ }),
 
+/***/ "./node_modules/number-precision/build/index.es.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/number-precision/build/index.es.js ***!
+  \*********************************************************/
+/*! exports provided: strip, plus, minus, times, divide, round, digitLength, float2Fixed, enableBoundaryChecking, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "strip", function() { return strip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "plus", function() { return plus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "minus", function() { return minus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "times", function() { return times; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "divide", function() { return divide; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "round", function() { return round; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "digitLength", function() { return digitLength; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "float2Fixed", function() { return float2Fixed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enableBoundaryChecking", function() { return enableBoundaryChecking; });
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+/**
+ * @desc 解决浮动运算问题，避免小数点后产生多位数和计算精度损失。
+ * 问题示例：2.3 + 2.4 = 4.699999999999999，1.0 - 0.9 = 0.09999999999999998
+ */
+/**
+ * 把错误的数据转正
+ * strip(0.09999999999999998)=0.1
+ */
+function strip(num, precision) {
+    if (precision === void 0) { precision = 15; }
+    return +parseFloat(Number(num).toPrecision(precision));
+}
+/**
+ * Return digits length of a number
+ * @param {*number} num Input number
+ */
+function digitLength(num) {
+    // Get digit length of e
+    var eSplit = num.toString().split(/[eE]/);
+    var len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
+    return len > 0 ? len : 0;
+}
+/**
+ * 把小数转成整数，支持科学计数法。如果是小数则放大成整数
+ * @param {*number} num 输入数
+ */
+function float2Fixed(num) {
+    if (num.toString().indexOf('e') === -1) {
+        return Number(num.toString().replace('.', ''));
+    }
+    var dLen = digitLength(num);
+    return dLen > 0 ? strip(Number(num) * Math.pow(10, dLen)) : Number(num);
+}
+/**
+ * 检测数字是否越界，如果越界给出提示
+ * @param {*number} num 输入数
+ */
+function checkBoundary(num) {
+    if (_boundaryCheckingState) {
+        if (num > Number.MAX_SAFE_INTEGER || num < Number.MIN_SAFE_INTEGER) {
+            console.warn(num + " is beyond boundary when transfer to integer, the results may not be accurate");
+        }
+    }
+}
+/**
+ * 精确乘法
+ */
+function times(num1, num2) {
+    var others = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        others[_i - 2] = arguments[_i];
+    }
+    if (others.length > 0) {
+        return times.apply(void 0, __spreadArrays([times(num1, num2), others[0]], others.slice(1)));
+    }
+    var num1Changed = float2Fixed(num1);
+    var num2Changed = float2Fixed(num2);
+    var baseNum = digitLength(num1) + digitLength(num2);
+    var leftValue = num1Changed * num2Changed;
+    checkBoundary(leftValue);
+    return leftValue / Math.pow(10, baseNum);
+}
+/**
+ * 精确加法
+ */
+function plus(num1, num2) {
+    var others = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        others[_i - 2] = arguments[_i];
+    }
+    if (others.length > 0) {
+        return plus.apply(void 0, __spreadArrays([plus(num1, num2), others[0]], others.slice(1)));
+    }
+    var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+    return (times(num1, baseNum) + times(num2, baseNum)) / baseNum;
+}
+/**
+ * 精确减法
+ */
+function minus(num1, num2) {
+    var others = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        others[_i - 2] = arguments[_i];
+    }
+    if (others.length > 0) {
+        return minus.apply(void 0, __spreadArrays([minus(num1, num2), others[0]], others.slice(1)));
+    }
+    var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+    return (times(num1, baseNum) - times(num2, baseNum)) / baseNum;
+}
+/**
+ * 精确除法
+ */
+function divide(num1, num2) {
+    var others = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        others[_i - 2] = arguments[_i];
+    }
+    if (others.length > 0) {
+        return divide.apply(void 0, __spreadArrays([divide(num1, num2), others[0]], others.slice(1)));
+    }
+    var num1Changed = float2Fixed(num1);
+    var num2Changed = float2Fixed(num2);
+    checkBoundary(num1Changed);
+    checkBoundary(num2Changed);
+    // fix: 类似 10 ** -4 为 0.00009999999999999999，strip 修正
+    return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
+}
+/**
+ * 四舍五入
+ */
+function round(num, ratio) {
+    var base = Math.pow(10, ratio);
+    return divide(Math.round(times(num, base)), base);
+}
+var _boundaryCheckingState = true;
+/**
+ * 是否进行边界检查，默认开启
+ * @param flag 标记开关，true 为开启，false 为关闭，默认为 true
+ */
+function enableBoundaryChecking(flag) {
+    if (flag === void 0) { flag = true; }
+    _boundaryCheckingState = flag;
+}
+var index = {
+    strip: strip,
+    plus: plus,
+    minus: minus,
+    times: times,
+    divide: divide,
+    round: round,
+    digitLength: digitLength,
+    float2Fixed: float2Fixed,
+    enableBoundaryChecking: enableBoundaryChecking,
+};
+
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -43027,138 +43390,149 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "saldo_deuda" } }, [
-              _vm._v("Saldo de la deuda $")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.saldo_deuda,
-                  expression: "saldo_deuda"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "saldo_deuda" },
-              domProps: { value: _vm.saldo_deuda },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _c("div", { staticClass: "col-lg-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "saldo_deuda" } }, [
+                _vm._v("Saldo de la deuda $")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.saldo_deuda,
+                    expression: "saldo_deuda"
                   }
-                  _vm.saldo_deuda = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "abono" } }, [_vm._v("Abono $")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.abono,
-                  expression: "abono"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "abono" },
-              domProps: { value: _vm.abono },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "saldo_deuda" },
+                domProps: { value: _vm.saldo_deuda },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.saldo_deuda = $event.target.value
                   }
-                  _vm.abono = $event.target.value
                 }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "monto" } }, [
-              _vm._v("Monto a cobrar (Cuotas) $")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.monto,
-                  expression: "monto"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "monto" },
-              domProps: { value: _vm.monto },
-              on: {
-                keyup: _vm.calcularPeriodo,
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.monto = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "interes" } }, [_vm._v("Interés %")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.interes,
-                  expression: "interes"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "interes" },
-              domProps: { value: _vm.interes },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.interes = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.periodos != null && _vm.periodos != 0
-          ? _c("div", { staticClass: "col-lg-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "" } }, [
-                  _vm._v(
-                    "Pago realizados a un plazo de " +
-                      _vm._s(_vm.periodos) +
-                      " mes(es)"
-                  )
-                ])
-              ])
+              })
             ])
-          : _vm._e()
-      ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "abono" } }, [_vm._v("Abono $")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.abono,
+                    expression: "abono"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "abono" },
+                domProps: { value: _vm.abono },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.abono = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "monto" } }, [
+                _vm._v("Monto a cobrar (Cuotas) $")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.monto,
+                    expression: "monto"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "monto" },
+                domProps: { value: _vm.monto },
+                on: {
+                  keyup: _vm.calcularPeriodo,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.monto = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "interes" } }, [_vm._v("Interés %")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.interes,
+                    expression: "interes"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "interes" },
+                domProps: { value: _vm.interes },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.interes = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.periodos !== null &&
+          _vm.periodos > 0 &&
+          _vm.periodos !== NaN &&
+          _vm.periodos !== Infinity &&
+          _vm.periodos !== "NaN"
+            ? [
+                _c("div", { staticClass: "col-lg-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v(
+                        "Pago realizados a un plazo de\n                            " +
+                          _vm._s(_vm.periodos) +
+                          " mes(es)"
+                      )
+                    ])
+                  ])
+                ])
+              ]
+            : _vm._e()
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-lg-5" }, [
@@ -43170,7 +43544,11 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.calcularAmortizacion }
               },
-              [_vm._v("Calcular")]
+              [
+                _vm._v(
+                  "\n                        Calcular\n                    "
+                )
+              ]
             ),
             _vm._v(" "),
             _c(
@@ -43180,7 +43558,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.reset }
               },
-              [_vm._v("Nuevo")]
+              [_vm._v("\n                        Nuevo\n                    ")]
             )
           ])
         ])
@@ -43279,44 +43657,57 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cedula,
-                expression: "cedula"
-              }
-            ],
-            staticClass: "form-control col-lg-6",
-            attrs: {
-              type: "text",
-              placeholder: "Buscar por cédula del cliente"
-            },
-            domProps: { value: _vm.cedula },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.cedula = $event.target.value
-              }
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.search($event)
             }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-info",
-              attrs: { type: "submit" },
-              on: { click: _vm.search }
-            },
-            [_vm._v("\n                    Buscar\n                ")]
-          )
-        ])
-      ])
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cedula,
+                    expression: "cedula"
+                  }
+                ],
+                staticClass: "form-control col-lg-6",
+                attrs: {
+                  type: "text",
+                  placeholder: "Buscar por cédula del cliente"
+                },
+                domProps: { value: _vm.cedula },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cedula = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-info", attrs: { type: "submit" } },
+                [
+                  _vm._v(
+                    "\n                        Buscar\n                    "
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body table-responsive" }, [
@@ -43343,39 +43734,56 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.clientes, function(cliente) {
-              return _c("tr", { key: cliente.campana }, [
+              return _c("tr", { key: cliente.id }, [
                 _c("td", {
-                  domProps: { textContent: _vm._s(cliente.IdCampaña) }
+                  domProps: { textContent: _vm._s(cliente.campania_id) }
                 }),
                 _vm._v(" "),
                 _c("td", {
-                  domProps: { textContent: _vm._s(cliente.Identificacion) }
+                  domProps: {
+                    textContent: _vm._s(cliente.cliente.Identificacion)
+                  }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(cliente.cliente.Nombres) +
+                      "\n                        " +
+                      _vm._s(cliente.cliente.Apellidos) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: {
+                    textContent: _vm._s(cliente.campania.nombre_campania)
+                  }
                 }),
                 _vm._v(" "),
                 _c("td", {
-                  domProps: { textContent: _vm._s(cliente.Nombres) }
+                  domProps: { textContent: _vm._s(cliente.valor_deuda) }
                 }),
                 _vm._v(" "),
                 _c("td", {
-                  domProps: { textContent: _vm._s(cliente.Descripcion) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: { textContent: _vm._s(cliente.ValorDeuda) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: { textContent: _vm._s(cliente.SaldoDeuda) }
+                  domProps: {
+                    textContent: _vm._s(Math.round(cliente.valor_saldo, 2))
+                  }
                 }),
                 _vm._v(" "),
                 _c("td", [
                   _c(
                     "a",
                     {
-                      staticClass: "btn btn-sm btn-primary",
+                      staticClass: "btn btn-sm btn-info",
                       attrs: { href: ["cliente?id=" + cliente.id] }
                     },
-                    [_c("i", { staticClass: "fa fa-dollar-sign" })]
+                    [
+                      _c("i", { staticClass: "fa fa-dollar-sign" }),
+                      _vm._v(
+                        " Generar plan\n                            de pago"
+                      )
+                    ]
                   )
                 ])
               ])
@@ -43406,11 +43814,128 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Saldo")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Ver")])
+        _c("th", [_vm._v("Proceso")])
       ])
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    _vm._l(_vm.pagos, function(pago, index) {
+      return _c("div", { key: pago.id, staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            {
+              class: [
+                Math.round(pago.campania_id.valor_saldo, 3) > 0
+                  ? "card-header bg-danger"
+                  : "card-header bg-success"
+              ]
+            },
+            [
+              _c("h1", { staticClass: "card-title text-white" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(pago.campania_id.campania.nombre_campania) +
+                    "\n                "
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "card-horizontal" }, [
+              _c("div", { staticClass: "img-square-wrapper" }, [
+                _c("a", { attrs: { href: ["users/" + pago.user_id] } }, [
+                  _c("img", {
+                    staticClass: "imgUser",
+                    attrs: {
+                      src: ["/fotos/" + pago.user.foto],
+                      alt: "Card image cap"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(pago.campania_id.cliente.Nombres) +
+                      "\n                            " +
+                      _vm._s(pago.campania_id.cliente.Apellidos) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(
+                    "\n                            Valor de la cuota: $" +
+                      _vm._s(pago.cuota) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v("Abono: $" + _vm._s(pago.abono))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(
+                    "\n                            Deuda total: $" +
+                      _vm._s(pago.campania_id.valor_deuda) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(
+                    "\n                            Deuda pendiente: $" +
+                      _vm._s(Math.round(pago.campania_id.valor_saldo, 3)) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer" }, [
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v(_vm._s(pago.fecha_pago))
+              ])
+            ])
+          ])
+        ])
+      ])
+    }),
+    0
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43440,7 +43965,7 @@ var render = function() {
             _c("strong", [_vm._v("Identificación:")]),
             _vm._v(
               "\n                    " +
-                _vm._s(_vm.cliente.Identificacion) +
+                _vm._s(_vm.cliente.cliente.Identificacion) +
                 "\n                "
             )
           ])
@@ -43449,14 +43974,24 @@ var render = function() {
         _c("div", { staticClass: "col-lg-3" }, [
           _c("span", [
             _c("strong", [_vm._v("Cliente:")]),
-            _vm._v(" " + _vm._s(_vm.cliente.Nombres) + "\n                ")
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.cliente.cliente.Nombres) +
+                "\n                    " +
+                _vm._s(_vm.cliente.cliente.Apellidos) +
+                "\n                "
+            )
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-3" }, [
           _c("span", [
             _c("strong", [_vm._v("Dirección:")]),
-            _vm._v(" " + _vm._s(_vm.cliente.direccion) + "\n                ")
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.cliente.cliente.direccion) +
+                "\n                "
+            )
           ])
         ])
       ]),
@@ -43472,7 +44007,9 @@ var render = function() {
             _c("span", [
               _c("strong", [_vm._v("Campaña:")]),
               _vm._v(
-                " " + _vm._s(_vm.cliente.Descripcion) + "\n                "
+                "\n                    " +
+                  _vm._s(_vm.cliente.campania.nombre_campania) +
+                  "\n                "
               )
             ])
           ]),
@@ -43481,7 +44018,7 @@ var render = function() {
             _c("span", [
               _c("strong", [_vm._v("Deuda:")]),
               _vm._v(
-                " " + _vm._s(_vm.cliente.ValorDeuda) + "\n                "
+                " " + _vm._s(_vm.cliente.valor_deuda) + "\n                "
               )
             ])
           ]),
@@ -43490,7 +44027,9 @@ var render = function() {
             _c("span", [
               _c("strong", [_vm._v("Saldo:")]),
               _vm._v(
-                " " + _vm._s(_vm.cliente.SaldoDeuda) + "\n                "
+                "\n                    " +
+                  _vm._s(Math.round(_vm.cliente.valor_saldo, 3)) +
+                  "\n                "
               )
             ])
           ])
@@ -43586,8 +44125,8 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "interes" } }, [
-                  _vm._v("Interés (%)")
+                _c("label", { attrs: { for: "fecha_pago" } }, [
+                  _vm._v("Fecha en la que realizará el primer pago")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -43595,32 +44134,27 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.interes,
-                      expression: "interes"
+                      value: _vm.fecha_pago,
+                      expression: "fecha_pago"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    required: "required",
-                    placeholder: "Ingrese el Interés"
-                  },
-                  domProps: { value: _vm.interes },
+                  attrs: { type: "date", required: "required" },
+                  domProps: { value: _vm.fecha_pago },
                   on: {
-                    keyup: function($event) {
-                      return _vm.validarInteresNumerico()
-                    },
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.interes = $event.target.value
+                      _vm.fecha_pago = $event.target.value
                     }
                   }
                 })
               ]),
               _vm._v(" "),
-              _vm.calcularPeriodo != null && _vm.calcularPeriodo > 0
+              _vm.calcularPeriodo != null &&
+              _vm.calcularPeriodo > 0 &&
+              _vm.calcularPeriodo != Infinity
                 ? [
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "" } }, [
@@ -43671,97 +44205,71 @@ var render = function() {
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "fecha_pago" } }, [
-                _vm._v("Fecha en la que realizará el primer pago")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.fecha_pago,
-                    expression: "fecha_pago"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "date", required: "required" },
-                domProps: { value: _vm.fecha_pago },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.fecha_pago = $event.target.value
-                  }
-                }
-              })
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-sm btn-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.calculate }
-              },
-              [
-                _vm._v(
-                  "\n                    Calcular amortización\n                "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-sm btn-warning",
-                attrs: { type: "button" },
-                on: { click: _vm.reset }
-              },
-              [_vm._v("\n                    Nuevo\n                ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-sm btn-success",
-                attrs: { type: "button" },
-                on: { click: _vm.postPago }
-              },
-              [_vm._v("\n                    Enviar\n                ")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.amortizar == true
-          ? [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.calculate }
+                },
+                [
+                  _vm._v(
+                    "\n                    Calcular amortización\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-warning",
+                  attrs: { type: "button" },
+                  on: { click: _vm.reset }
+                },
+                [_vm._v("\n                    Nuevo\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-success",
+                  attrs: { type: "button" },
+                  on: { click: _vm.postPago }
+                },
+                [_vm._v("\n                    Enviar\n                ")]
+              ),
+              _vm._v(" "),
+              _vm.amortizar == true
+                ? [
                     _c(
                       "button",
                       {
                         staticClass: "btn btn-sm btn-info",
-                        staticStyle: { float: "right" },
                         attrs: { type: "button" },
                         on: { click: _vm.donwloadPdf }
                       },
                       [
                         _vm._v(
-                          "\n                            Descargar tabla\n                        "
+                          "\n                        Descargar tabla\n                    "
                         )
                       ]
                     )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
+                  ]
+                : _vm._e()
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm.amortizar == true
+          ? [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "table-responsive" }, [
                   _c(
@@ -43838,7 +44346,7 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-sm btn-info",
-                            attrs: { href: ["/pagos/detalles/pago/" + pago.id] }
+                            attrs: { href: ["/pagos/detalles/" + pago.id] }
                           },
                           [_c("i", { staticClass: "fa fa-eye" })]
                         )
@@ -56105,6 +56613,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('cliente-component', __webpack_require__(/*! ./components/ClienteComponent.vue */ "./resources/js/components/ClienteComponent.vue")["default"]);
 Vue.component('pagos-component', __webpack_require__(/*! ./components/PagosComponent.vue */ "./resources/js/components/PagosComponent.vue")["default"]);
 Vue.component('amortizacion-component', __webpack_require__(/*! ./components/AmortizacionComponent.vue */ "./resources/js/components/AmortizacionComponent.vue")["default"]);
+Vue.component('dashboard-component', __webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -56307,6 +56816,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClienteComponent_vue_vue_type_template_id_6155990e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClienteComponent_vue_vue_type_template_id_6155990e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony import */ var _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DashboardComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DashboardComponent.vue?vue&type=template&id=01ab55f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardComponent.vue?vue&type=template&id=01ab55f4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardComponent_vue_vue_type_template_id_01ab55f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -63,10 +63,9 @@ class PagoController extends Controller
      */
     public function detalles($id)
     {
-        $pago = Pago::with(['detallePagos' => function ($q) { $q->orderBy('id', 'asc'); }])->findOrFail($id);
+        $pago = Pago::with(['detallePagos' => function ($q) { $q->where('cuota_fija', '>', 0)->orderBy('id', 'asc'); }])->findOrFail($id);
         return view('pagos.amortizacion', ['pago' => $pago]);
     }
-
 
     /**
      * Display the specified resource.
@@ -116,11 +115,11 @@ class PagoController extends Controller
                 return redirect()->back()->withInput()->withErrors($validate->errors());
             }
 
-            $monto_cobrar = $detalleCampania->valor_saldo - $request->abono;
-            $interesDecimal = ($request->interes / 100);
-            $denominador = pow((1 / (1 + $interesDecimal)), $request->periodo);
+            // $monto_cobrar = $detalleCampania->valor_saldo - $request->abono;
+            // $interesDecimal = ($request->interes / 100);
+            // $denominador = pow((1 / (1 + $interesDecimal)), $request->periodo);
             
-            $cuota = ($interesDecimal * $monto_cobrar) / (1 - $denominador);
+            // $cuota = ($interesDecimal * $monto_cobrar) / (1 - $denominador);
             
 
             /*
@@ -136,15 +135,14 @@ class PagoController extends Controller
             {
                 $dCampania->valor_saldo = ($dCampania->valor_saldo - $request->abono);
                 $dCampania->update();
-
-                
+          
                 /*
                     Creando el pago
                 */       
                 $pago->detalle_campania_id = $dCampania->id;
                 $pago->periodo = $request->periodo;
                 $pago->interes = $request->interes;
-                $pago->cuota = $cuota;
+                $pago->cuota = $request->cuota;
                 $pago->abono = $request->abono;
                 $pago->fecha_pago = $request->fecha_pago;
                 $pago->save();

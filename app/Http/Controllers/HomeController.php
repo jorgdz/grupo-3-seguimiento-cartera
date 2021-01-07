@@ -23,4 +23,8 @@ class HomeController extends Controller
 
         return view('home', ['user' => $user]);
     }
+
+    public function showPlanPagos () {
+        return view('dashboard');
+    }
 }

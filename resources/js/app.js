@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('cliente-component', require('./components/ClienteComponent.vue').default);
 Vue.component('pagos-component', require('./components/PagosComponent.vue').default);
 Vue.component('amortizacion-component', require('./components/AmortizacionComponent.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

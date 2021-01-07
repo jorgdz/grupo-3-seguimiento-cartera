@@ -29,6 +29,14 @@ class ApiPagoController extends Controller
         return response()->json([], 200);
     }
 
+    public function getPlanPagos (Request $request) {
+        $pagos = Pago::with('user')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response()->json($pagos, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,32 +58,39 @@ class ApiPagoController extends Controller
         try
         {      
             $pago = new Pago();
-                        
-            /*
+            
+            $existPlanPago = Pago::where('campania_id', $request->campania_id)->first();
+
+            if(isset($existPlanPago) && $existPlanPago != null) {
+                return response()->json(['data' => 'Ya tienes creado un plan de pago, en caso de querer hacer un nuevo refinanciamiento por favor eliminar el plan de pago viejo y cree uno nuevo.'], 400);
+            } else {
+                /*
                 Creando el pago
-            */       
-            $pago->campania_idc = $request->campania_idc;
-            $pago->periodo = $request->periodo;
-            $pago->interes = $request->interes;
-            $pago->cuota = $request->cuota;
-            $pago->abono = $request->abono;
-            $pago->fecha_pago = $request->fecha_pago;
-            $pago->user_id = \Auth::user()->id;
-            $pago->save();
+                */       
+                $pago->campania_id = $request->campania_id;
+                $pago->periodo = $request->periodo;
+                $pago->interes = $request->interes;
+                $pago->cuota = $request->cuota;
+                $pago->abono = $request->abono;
+                $pago->fecha_pago = $request->fecha_pago;
+                $pago->user_id = \Auth::user()->id;
+                $pago->save();
 
 
-            /*
-                Primer periodo de amortización
-            */
-         /*   $detalle_pago = new DetallePago(); 
-            $detalle_pago->pago_id = $pago->id;
-            $detalle_pago->saldo_inicial = $request->monto_cobrar;
-            $detalle_pago->cuota_fija = 0;
-            $detalle_pago->fecha_pago = date("Y-m-d", strtotime($request->fecha_pago."+ 1 month"));
-            $detalle_pago->user_id = \Auth::user()->id;
-            $detalle_pago->save();*/
+                /*
+                    Primer periodo de amortización
+                */
+                $detalle_pago = new DetallePago(); 
+                $detalle_pago->pago_id = $pago->id;
+                $detalle_pago->saldo_inicial = $request->monto_cobrar;
+                $detalle_pago->cuota_fija = 0;
+                $detalle_pago->estado_pago = 'PENDIENTE';
+                //$detalle_pago->fecha_pago = date("Y-m-d", strtotime($request->fecha_pago."+ 1 month"));
+                $detalle_pago->fecha_pago = $request->fecha_pago;
+                $detalle_pago->save();
 
-            return response()->json(['success' => 'Estimado usuario, el cliente '.$request->nombres.' tiene una deuda de '.$request->valorDeuda.' en la campaña de '.$request->campania.', con un saldo de $'.$request->saldoDeuda.' menos el abono $'.($request->saldoDeuda - $request->abono).', los pagos los efectuará al cabo de '.$request->periodo.' mes(es), con una cuota de $'.round($pago->cuota, 3).', su primer pago lo debe realizar a partir del '.date('d/m/Y', strtotime($pago->fecha_pago."+ 1 month"))], 202);
+                return response()->json(['success' => 'Estimado usuario, el cliente '.$request->nombres.' tiene una deuda de '.$request->valorDeuda.' en la campaña de '.$request->campania.', con un saldo de $'.$request->saldoDeuda.' menos el abono $'.($request->saldoDeuda - $request->abono).', los pagos los efectuará al cabo de '.$request->periodo.' mes(es), con una cuota de $'.round($pago->cuota, 3).', su primer pago lo debe realizar a partir del '.$pago->fecha_pago], 202);
+            }
         }
         catch(Exception $e)
         {

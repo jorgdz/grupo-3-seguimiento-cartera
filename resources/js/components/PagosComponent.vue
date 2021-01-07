@@ -5,34 +5,39 @@
                 <div class="col-lg-3">
                     <span
                         ><strong>Identificación:</strong>
-                        {{ cliente.Identificacion }}
+                        {{ cliente.cliente.Identificacion }}
                     </span>
                 </div>
                 <div class="col-lg-3">
                     <span
-                        ><strong>Cliente:</strong> {{ cliente.Nombres }}
+                        ><strong>Cliente:</strong>
+                        {{ cliente.cliente.Nombres }}
+                        {{ cliente.cliente.Apellidos }}
                     </span>
                 </div>
                 <div class="col-lg-3">
                     <span
-                        ><strong>Dirección:</strong> {{ cliente.direccion }}
+                        ><strong>Dirección:</strong>
+                        {{ cliente.cliente.direccion }}
                     </span>
                 </div>
             </div>
             <div class="row" style="background-color:crimson; color: white;">
                 <div class="col-lg-3">
                     <span
-                        ><strong>Campaña:</strong> {{ cliente.Descripcion }}
+                        ><strong>Campaña:</strong>
+                        {{ cliente.campania.nombre_campania }}
                     </span>
                 </div>
                 <div class="col-lg-3">
                     <span
-                        ><strong>Deuda:</strong> {{ cliente.ValorDeuda }}
+                        ><strong>Deuda:</strong> {{ cliente.valor_deuda }}
                     </span>
                 </div>
                 <div class="col-lg-3">
                     <span
-                        ><strong>Saldo:</strong> {{ cliente.SaldoDeuda }}
+                        ><strong>Saldo:</strong>
+                        {{ Math.round(cliente.valor_saldo, 3) }}
                     </span>
                 </div>
             </div>
@@ -79,7 +84,7 @@
                         />
                     </div>
 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="interes">Interés (%)</label>
                         <input
                             type="text"
@@ -89,10 +94,24 @@
                             required="required"
                             placeholder="Ingrese el Interés"
                         />
+                    </div>-->
+                    <div class="form-group">
+                        <label for="fecha_pago"
+                            >Fecha en la que realizará el primer pago</label
+                        >
+                        <input
+                            type="date"
+                            v-model="fecha_pago"
+                            required="required"
+                            class="form-control"
+                        />
                     </div>
-
                     <template
-                        v-if="calcularPeriodo != null && calcularPeriodo > 0"
+                        v-if="
+                            calcularPeriodo != null &&
+                                calcularPeriodo > 0 &&
+                                calcularPeriodo != Infinity
+                        "
                     >
                         <div class="form-group">
                             <label for=""
@@ -112,17 +131,6 @@
                             v-model="cuota"
                             required="required"
                             placeholder="Ingrese la cuota a pagar"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha_pago"
-                            >Fecha en la que realizará el primer pago</label
-                        >
-                        <input
-                            type="date"
-                            v-model="fecha_pago"
-                            required="required"
-                            class="form-control"
                         />
                     </div>
                 </div>
@@ -148,24 +156,19 @@
                     >
                         Enviar
                     </button>
+                    <template v-if="amortizar == true">
+                        <button
+                            type="button"
+                            @click="donwloadPdf"
+                            class="btn btn-sm btn-info"
+                        >
+                            Descargar tabla
+                        </button>
+                    </template>
                 </div>
             </div>
 
             <template v-if="amortizar == true">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <button
-                                type="button"
-                                @click="donwloadPdf"
-                                class="btn btn-sm btn-info"
-                                style="float: right;"
-                            >
-                                Descargar tabla
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="table-responsive">
                         <table
@@ -231,9 +234,7 @@
 
                                 <td>
                                     <a
-                                        :href="[
-                                            '/pagos/detalles/pago/' + pago.id
-                                        ]"
+                                        :href="['/pagos/detalles/' + pago.id]"
                                         class="btn btn-sm btn-info"
                                         ><i class="fa fa-eye"></i
                                     ></a>
@@ -261,6 +262,7 @@ import axios from "axios";
 import swal from "sweetalert2";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import NP from "number-precision";
 
 export default {
     props: ["id"],
@@ -270,11 +272,11 @@ export default {
 
             cliente: {},
             pagos: [],
-            url: "http://192.168.1.107/ventas/public/",
+            url: "/",
 
             abono: 0.0,
             periodo: 0,
-            interes: 0.0,
+            interes: 5,
             fecha_pago: "",
 
             cuota: 0.0,
@@ -291,9 +293,10 @@ export default {
         calcularPeriodo() {
             let me = this;
             me.periodo = Math.round(
-                (parseFloat(me.cliente.SaldoDeuda) - parseFloat(me.abono)) /
+                (parseFloat(me.cliente.valor_deuda) - parseFloat(me.abono)) /
                     parseFloat(me.cuota)
             );
+
             return Math.round(me.periodo);
         }
     },
@@ -302,7 +305,7 @@ export default {
         getCampanaCliente() {
             let me = this;
             axios
-                .get(`${me.url}apiclientes?id=${me.idcampana}`)
+                .get(`${me.url}api/campaigns/${me.idcampana}/clients`)
                 .then(res => {
                     me.cliente = res.data;
                 })
@@ -387,13 +390,14 @@ export default {
 
             return dia + "/" + meses[mesIndice] + "/" + anio;
         },
+
         calculate() {
             if (this.validate()) {
                 return;
             } else {
                 let me = this;
 
-                if (me.cliente.SaldoDeuda < 0.1) {
+                if (me.cliente.valor_saldo < 0.1) {
                     swal(
                         "Error",
                         "El cliente no tiene deuda para crear un plan de pago",
@@ -406,37 +410,48 @@ export default {
 
                     let object = {};
 
-                    let monto_cobrar = Math.round(
-                        parseFloat(me.cliente.SaldoDeuda) -
-                            parseFloat(me.abono),
-                        3
-                    );
+                    let tmpMontoCobrar =
+                        parseFloat(me.cliente.valor_saldo) -
+                        parseFloat(me.abono);
+
+                    let monto_cobrar = NP.round(tmpMontoCobrar, 3);
+
                     let interesDecimal = parseFloat(me.interes) / 100;
                     let denominador = Math.pow(
                         1 / (1 + parseFloat(interesDecimal)),
                         parseFloat(me.periodo)
                     );
 
-                    let cuota_fija =
+                    let cuota_fija = NP.round(
                         (parseFloat(interesDecimal) *
                             parseFloat(monto_cobrar)) /
-                        (1 - parseFloat(denominador));
+                            (1 - parseFloat(denominador)),
+                        3
+                    );
 
                     let intereses = 0.0;
                     let amortizacion = 0.0;
                     let saldo_final = 0.0;
 
-                    for (var i = 1; i <= me.periodo; i++) {
-                        intereses =
+                    for (var i = 0; i < me.periodo; i++) {
+                        intereses = NP.round(
                             parseFloat(monto_cobrar) *
-                            parseFloat(me.interes / 100);
-                        amortizacion =
-                            parseFloat(cuota_fija) - parseFloat(intereses);
-                        saldo_final =
-                            parseFloat(monto_cobrar) - parseFloat(amortizacion);
+                                parseFloat(me.interes / 100),
+                            3
+                        );
+
+                        amortizacion = NP.round(
+                            parseFloat(cuota_fija) - parseFloat(intereses),
+                            3
+                        );
+
+                        saldo_final = NP.round(
+                            parseFloat(monto_cobrar) - parseFloat(amortizacion),
+                            3
+                        );
 
                         object = {
-                            id: i,
+                            id: i + 1,
                             saldo_inicial: monto_cobrar,
                             cuota: cuota_fija,
                             interes: intereses,
@@ -469,11 +484,19 @@ export default {
                 { title: "Saldo final", dataKey: "saldo_final" }
             ];
 
-            doc.text("Amortización del cliente " + me.cliente.Nombres, 10, 18);
+            doc.text(
+                "CLIENTE: " +
+                    me.cliente.cliente.Nombres +
+                    " " +
+                    me.cliente.cliente.Apellidos,
+                10,
+                18
+            );
             doc.autoTable(columns, me.arrayData);
             doc.save(
                 "amortizacion-" +
-                    (me.cliente.IdCampaña + me.cliente.Identificacion) +
+                    (me.cliente.campania.id +
+                        me.cliente.cliente.Identificacion) +
                     ".pdf"
             );
         },
@@ -484,7 +507,7 @@ export default {
             } else {
                 let me = this;
 
-                if (me.cliente.SaldoDeuda < 0.1) {
+                if (me.cliente.valor_saldo < 0.1) {
                     swal(
                         "Error",
                         "El cliente no tiene deuda para crear un plan de pago",
@@ -492,7 +515,7 @@ export default {
                     );
                 } else {
                     let monto_cobrar =
-                        parseFloat(me.cliente.SaldoDeuda) -
+                        parseFloat(me.cliente.valor_saldo) -
                         parseFloat(me.abono);
                     let interesDecimal = parseFloat(me.interes) / 100;
                     let denominador = Math.pow(
@@ -500,26 +523,29 @@ export default {
                         parseFloat(me.periodo)
                     );
 
-                    let cuota =
+                    let cuota = NP.round(
                         (parseFloat(interesDecimal) *
                             parseFloat(monto_cobrar)) /
-                        (1 - parseFloat(denominador));
+                            (1 - parseFloat(denominador)),
+                        2
+                    );
 
                     axios
                         .post(`/apipago/store`, {
-                            campania_idc:
-                                me.cliente.IdCampaña +
-                                me.cliente.Identificacion,
+                            campania_id: me.idcampana,
                             periodo: me.periodo,
                             interes: me.interes,
                             cuota: cuota,
                             abono: me.abono,
                             fecha_pago: me.fecha_pago,
                             monto_cobrar: monto_cobrar,
-                            nombres: me.cliente.Nombres,
-                            saldoDeuda: me.cliente.SaldoDeuda,
-                            valorDeuda: me.cliente.ValorDeuda,
-                            campania: me.cliente.Descripcion
+                            nombres:
+                                me.cliente.cliente.Nombres +
+                                " " +
+                                me.cliente.cliente.Apellidos,
+                            saldoDeuda: me.cliente.valor_saldo,
+                            valorDeuda: me.cliente.valor_deuda,
+                            campania: me.cliente.campania.nombre_campania
                         })
                         .then(res => {
                             me.getPagos();
@@ -541,7 +567,7 @@ export default {
                             monto_cobrar = 0.0;
                             interesDecimal = 0.0;
                             cuota = 0.0;
-                            swal("Error", err.response.data, "error");
+                            swal("Error", err.response.data.data, "error");
                         });
                 }
             }

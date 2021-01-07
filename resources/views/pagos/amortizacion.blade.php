@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Amortización de '.$pago->detalleCampania->campania->nombre_campania )
+@section('title', 'Amortización de '.$pago->campania_id->nombre_campania )
 @section('content')
 
     <div class="row">
@@ -45,9 +45,9 @@
                     	<input type="hidden" name="pago_id" value="{{ $pago->id }}">
 
                     	{{ Form::label('abono', 'Valor de la cuota ($)') }}
-                    	: Su valor de la cuota mensual es: <strong>{{ round($pago->cuota, 4) }}</strong>
-                    	<p><em>Valor con todos los decimales: {{ $pago->cuota }}</em></p>
-                    	<p><em>Saldo de la deuda: <strong>{{ ($pago->detalleCampania->valor_saldo < 0.001) ? 0 : $pago->detalleCampania->valor_saldo}}</strong> </em></p>
+                    	: Su valor de la cuota mensual es: <strong>{{ round($pago->cuota, 3) }}</strong>
+    
+                    	<p><em>Saldo de la deuda: <strong>{{ ($pago->campania_id->valor_saldo < 0.024) ? 0 : $pago->campania_id->valor_saldo }}</strong> </em></p>
                     	<div class="col-lg-10">
 	                        <div class="form-group">
                             	<div class="row">                    
@@ -86,7 +86,7 @@
                                         <td>${{ $amortizacion->cuota_fija }}</td>
                                         <td>${{ $interes }} </td>
                                         <td>${{ $capital }}</td>
-                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : ($amortizacion->saldo_inicial - $capital) }}</td>                           
+                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : ($amortizacion->saldo_inicial - $capital) }}</td>
                                         <td>{{ date('d-M-Y', strtotime($amortizacion->fecha_pago))}}</td>                           
                                         <td>
                                         	
