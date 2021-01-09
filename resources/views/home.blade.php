@@ -48,8 +48,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Cargo</th>
-                                                <th>Departamento</th>
-                                                <th>Empresa</th>
+                                                <th>Departamento</th>               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,8 +56,7 @@
                                               <tr>
                                                 <td>{{ ($key + 1) }}</td>
                                                 <td>{{ $cargoDep->cargo->nombre_cargo }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->departamento->nombre_departamento }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->empresa->nombre_empresa }}</td>                                                
+                                                <td>{{ $cargoDep->departamento->nombre_departamento }}</td>                                                                   
                                               </tr>
                                             @endforeach
                                         </tbody>

@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\User;
+use App\Services\FirebaseService;
 
 class PerfilController extends Controller
 {
     private $storage;
-    private $bucket;
 
     public function __construct()
 	{
         $this->middleware('auth');
+        $this->storage = new FirebaseService();
 	} 
    
     /**
@@ -74,10 +75,33 @@ class PerfilController extends Controller
         $user->fecha_nacimiento = $request->fecha_nacimiento;
 
         if (Input::hasFile('foto')) {
+            
             $file = Input::file('foto');
             $file->move(public_path().'/fotos/',$file->getClientOriginalName());
             
-            $user->foto = $file->getClientOriginalName();
+            $fecha = new \DateTime();
+            $namePhoto = $fecha->getTimestamp().'-'.$file->getClientOriginalName();
+
+            $response = $this->storage->firebase->upload(
+                fopen(public_path().'/fotos'.'/'.$file->getClientOriginalName(), 'r'),
+                [
+                    'predefinedAcl' => 'publicRead',
+                    'name' => 'cartera/'.$namePhoto
+                ]
+            );
+            
+            if($response) {
+                unlink(public_path().'/fotos'.'/'.$file->getClientOriginalName());
+
+                if ($user->foto != 'https://storage.googleapis.com/istb-storage.appspot.com/cartera/user.png') {
+                    $arrayPicture = explode('/', $user->foto);
+                    
+                    $object = $this->storage->firebase->object('cartera/'.$arrayPicture[(count($arrayPicture) - 1)]);
+                    $object->delete();
+                }
+            }
+   
+            $user->foto = 'https://storage.googleapis.com/'.config('services.firebase.bucket').'/cartera'.'/'.$namePhoto;
         }
         
         $user->perfil_actualizado = true;

@@ -57,7 +57,7 @@
                                     <li class="breadcrumb-item"><a href="{{ route('inicio') }}">Inicio</a></li>
                                     
                                     @if(Auth::user()->perfil_actualizado)
-                                       <!-- @can('roles.index')
+                                        @can('roles.index')
                                             <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
                                         @endcan 
 
@@ -67,7 +67,7 @@
 
                                         @can('permissions.index')
                                             <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Permisos</a></li>
-                                        @endcan-->
+                                        @endcan
                                     @endif
                                     
                                     <li class="breadcrumb-item active">  @yield("miga")</li>

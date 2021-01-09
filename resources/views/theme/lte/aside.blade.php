@@ -14,7 +14,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             
-          <img src="{{ asset('fotos/'.Auth::user()->foto) }}" class="img-circle elevation-4" alt="{{ Auth::user()->foto }}">
+          <img src="{{ Auth::user()->foto }}" class="img-circle elevation-4" alt="{{ Auth::user()->foto }}">
           
         </div>
         <div class="info">

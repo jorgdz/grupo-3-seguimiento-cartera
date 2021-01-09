@@ -9,16 +9,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "barryvdh/laravel-debugbar": "^3.2",
         "caffeinated/shinobi": "3.4.*",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
+        "google/cloud-storage": "^1.23",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
         "maatwebsite/excel": "^3.1",
-        "tavo1987/laravel-ec-validator": "^1.1",
-        "barryvdh/laravel-debugbar": "^3.2",
-        "fzaninotto/faker": "^1.4"
+        "tavo1987/laravel-ec-validator": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

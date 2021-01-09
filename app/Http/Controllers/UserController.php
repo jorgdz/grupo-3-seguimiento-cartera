@@ -144,7 +144,7 @@ class UserController extends Controller
         $user->estado_civil = $request->estado_civil;
         $user->email = $request->email;
         $user->genero_id = $request->genero_id;
-        $user->foto = 'user.png';
+        $user->foto = 'https://storage.googleapis.com/istb-storage.appspot.com/cartera/user.png';
         $user->campania = $request->campania;
         $usuariogenerado = $this->getNickname(strtolower($request->nombre1), strtolower($request->nombre2), strtolower($request->apellido_paterno), strtolower($request->apellido_materno));
         
