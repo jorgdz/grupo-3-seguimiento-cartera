@@ -264,6 +264,8 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import NP from "number-precision";
 
+var socket = new WebSocket("ws://localhost:8090");
+
 export default {
     props: ["id"],
     data() {
@@ -550,13 +552,15 @@ export default {
                         .then(res => {
                             me.getPagos();
                             me.amortizar = false;
+
+                            socket.send("Pago creado!!");
+
                             swal("Correcto", res.data.success, "success");
 
                             me.resetError();
 
                             me.reset();
                             monto_cobrar = 0.0;
-                            interesDecimal = 0.0;
                             cuota = 0.0;
                         })
                         .catch(err => {
@@ -565,7 +569,6 @@ export default {
                             me.amortizar = false;
 
                             monto_cobrar = 0.0;
-                            interesDecimal = 0.0;
                             cuota = 0.0;
                             swal("Error", err.response.data.data, "error");
                         });
@@ -590,6 +593,8 @@ export default {
                         .delete("/apipago/" + id)
                         .then(res => {
                             me.getPagos();
+
+                            socket.send("Pago eliminado!!");
 
                             swal("Borrarlo!", "Pago eliminado.", "success");
                         })
@@ -646,7 +651,6 @@ export default {
             me.fecha_pago = "";
             me.periodo = 0;
             me.abono = 0.0;
-            me.interes = 0.0;
             me.cuota = 0.0;
             me.arrayData = [];
             me.amortizar = false;

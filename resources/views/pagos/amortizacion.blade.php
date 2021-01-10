@@ -52,7 +52,7 @@
 	                        <div class="form-group">
                             	<div class="row">                    
 	                                {{ Form::text('cuota_fija', null, ['class' => 'form-control col-lg-8', 'placeholder' => 'Ingrese el valor de la cuota']) }}
-	                                {{ Form::submit('Enviar', ['class' => 'btn btn-sm btn-primary']) }}
+	                                {{ Form::submit('Enviar', ['class' => 'btn btn-sm btn-primary', 'id' => 'btnSendAmortizacion']) }}
 	                            </div>
                             </div>                          
                	 		</div>    
@@ -115,4 +115,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script-discapacidad')
+
+    {{ Html::script('assets/js/updateDashboard.js') }}
+
 @endsection

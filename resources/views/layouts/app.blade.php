@@ -83,14 +83,11 @@
                     @yield("content")
 
                 </section>
-               
-                <aside class="control-sidebar control-sidebar-dark">
-                    <!-- Control sidebar content goes here -->
-                </aside>     
+                         
                 <!-- /.content -->
                 <!-- /.content-wrapper -->
              <!-- inicio footer -->
-             @extends("theme.lte.footer")
+             @include("theme.lte.footer")
               <!-- fin footer -->
             <!-- Control Sidebar -->    
         </div>   

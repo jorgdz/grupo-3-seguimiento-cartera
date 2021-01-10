@@ -19,7 +19,7 @@
                             <a :href="['users/' + pago.user_id]">
                                 <img
                                     class="imgUser"
-                                    :src="['/fotos/' + pago.user.foto]"
+                                    :src="[pago.user.foto]"
                                     alt="Card image cap"
                                 />
                             </a>
@@ -59,7 +59,8 @@ import axios from "axios";
 export default {
     data() {
         return {
-            pagos: []
+            pagos: [],
+            socket: null
         };
     },
     methods: {
@@ -77,10 +78,15 @@ export default {
     },
     mounted() {
         console.log("Componente dashboard montado.");
+        var me = this;
 
-        setInterval(() => {
-            this.getPagos();
-        }, 2000);
+        me.getPagos();
+        me.socket = new WebSocket("ws://localhost:8090");
+
+        me.socket.onmessage = function(e) {
+            console.log(e.data);
+            me.getPagos();
+        };
     }
 };
 </script>

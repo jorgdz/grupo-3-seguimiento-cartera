@@ -2249,7 +2249,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      pagos: []
+      pagos: [],
+      socket: null
     };
   },
   methods: {
@@ -2263,12 +2264,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
     console.log("Componente dashboard montado.");
-    setInterval(function () {
-      _this.getPagos();
-    }, 2000);
+    var me = this;
+    me.getPagos();
+    me.socket = new WebSocket("ws://localhost:8090");
+
+    me.socket.onmessage = function (e) {
+      console.log(e.data);
+      me.getPagos();
+    };
   }
 });
 
@@ -2556,6 +2560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var socket = new WebSocket("ws://localhost:8090");
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
@@ -2735,17 +2740,16 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             me.getPagos();
             me.amortizar = false;
+            socket.send("Pago creado!!");
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Correcto", res.data.success, "success");
             me.resetError();
             me.reset();
             monto_cobrar = 0.0;
-            interesDecimal = 0.0;
             cuota = 0.0;
           })["catch"](function (err) {
             console.log(err.response.data);
             me.amortizar = false;
             monto_cobrar = 0.0;
-            interesDecimal = 0.0;
             cuota = 0.0;
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Error", err.response.data.data, "error");
           });
@@ -2769,6 +2773,7 @@ __webpack_require__.r(__webpack_exports__);
           var me = _this;
           axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/apipago/" + id).then(function (res) {
             me.getPagos();
+            socket.send("Pago eliminado!!");
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Borrarlo!", "Pago eliminado.", "success");
           })["catch"](function (err) {
             console.log(err);
@@ -2822,7 +2827,6 @@ __webpack_require__.r(__webpack_exports__);
       me.fecha_pago = "";
       me.periodo = 0;
       me.abono = 0.0;
-      me.interes = 0.0;
       me.cuota = 0.0;
       me.arrayData = [];
       me.amortizar = false;
@@ -43872,10 +43876,7 @@ var render = function() {
                 _c("a", { attrs: { href: ["users/" + pago.user_id] } }, [
                   _c("img", {
                     staticClass: "imgUser",
-                    attrs: {
-                      src: ["/fotos/" + pago.user.foto],
-                      alt: "Card image cap"
-                    }
+                    attrs: { src: [pago.user.foto], alt: "Card image cap" }
                   })
                 ])
               ]),
