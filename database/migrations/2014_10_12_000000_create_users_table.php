@@ -42,19 +42,19 @@ class CreateUsersTable extends Migration
         });
 
         DB::table('users')->insert(array(
-                'cedula' => '1207118470', 
-                'nombre1' => 'Jorge',
-                'nombre2' => 'Isrrael',
-                'apellido_paterno' => 'Diaz',
-                'apellido_materno' => 'Montoya',
-                'foto' => '53377582.jfif',
-                'fecha_nacimiento' => '1994-10-31',
-                'enabled' => '1',
-                'perfil_actualizado' => '1',
-                'usuario' => 'admin',
-                'password' => '$2y$12$ZhM5n8UreTdt2C3qbuaxweTSlKP89aTb714dYf8sQXAA5stHyTxaC',
-                'genero_id' => '1',
-            ));
+            'cedula' => '1207118470', 
+            'nombre1' => 'Jorge',
+            'nombre2' => 'Isrrael',
+            'apellido_paterno' => 'Diaz',
+            'apellido_materno' => 'Montoya',
+            'foto' => '53377582.jfif',
+            'fecha_nacimiento' => '1994-10-31',
+            'enabled' => '1',
+            'perfil_actualizado' => '1',
+            'usuario' => 'admin',
+            'password' => '$2y$12$ZhM5n8UreTdt2C3qbuaxweTSlKP89aTb714dYf8sQXAA5stHyTxaC',
+            'genero_id' => '1',
+        ));
     }
     /**
      * Reverse the migrations.

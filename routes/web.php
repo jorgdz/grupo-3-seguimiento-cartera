@@ -14,9 +14,9 @@
 	Route::get('/','LandingController@index');
 
 	Route::group(['middleware' => ['guest']], function () {
-	//User guest
-	Route::get('/login','Auth\LoginController@formLogin');
-	Route::post('/login','Auth\LoginController@login')->name('login');
+		//User guest
+		Route::get('/login','Auth\LoginController@formLogin');
+		Route::post('/login','Auth\LoginController@login')->name('login');
 	});
 
 
@@ -83,6 +83,11 @@
 		Route::put('/users/assign/{user}', 'UserController@assign')->name('users.assign');
 	});
 
+
+
+	Route::group(['middleware' => ['permission:home.showPlanPagos']], function () {
+		Route::get('/dashboard', 'HomeController@showPlanPagos')->name('home.showPlanPagos');
+	});
 
 
 
@@ -180,33 +185,43 @@
 
 	Route::get('/api/departamentos/{id}', 'DepartamentoController@show')->name('departamentos.show');
 
-	Route::get('/api/clientes', function (){
-		$clientes = [
-			[
-				'id' => 1,
-				'Identificacion'=> '1208910002',
-				'Nombres'=> 'ROXANNA MARIA TROYA MONTOYA',
-				'Descripcion'=> 'RM CARTERA DEUDORA',
-				'campana'=> 'RM',
-				'IdCampaña' => 2,
-				'ValorDeuda'=> '140.30',
-				'SaldoDeuda'=> '150'
-			],
-			[
-				'id' => 2,
-				'Identificacion'=> '0923174440',
-				'Nombres'=> 'JUAN ALFREDO CAVILCA MERA',
-				'Descripcion'=> 'DP CARTERA',
-				'IdCampaña' => 12,
-				'campana'=> 'SUPER EASY',
-				'ValorDeuda'=> '80.55',
-				'SaldoDeuda'=> '90.40'
-			]
-		];
+	Route::get('/api/clientes', function (Illuminate\Http\Request $request) {		
+		$isAdmin = auth()->user()->hasRole('admin');
+
+		$clientes = null;
+
+		if($isAdmin) {
+			$clientes = App\Models\Admin\DetalleCampania::cedulaCliente($request->cedula)
+				->with('cliente')
+				->with('campania')
+				->paginate(7);
+		} else {
+			$clientes = App\Models\Admin\DetalleCampania::nombreCampania(\Auth::user()->campania)
+				->cedulaCliente($request->cedula)
+				->with('cliente')
+				->with('campania')
+				->paginate(7);
+		}
 
 		return response()->json($clientes, 200);
 	});
 
+	Route::get('/api/campaigns', function () {
+		$campaigns = App\Models\Admin\Campania::orderBy('nombre_campania', 'asc')
+			->get();
+
+		return $campaigns;
+	});
+	
+	Route::get('/api/campaigns/{id}/clients', function ($id) {
+		$campaignClient = App\Models\Admin\DetalleCampania::with('cliente')
+			->with('campania')
+			->findOrFail($id);
+
+		return response()->json($campaignClient, 200);
+	});
+
+	Route::get('/api/pagos', 'ApiPagoController@getPlanPagos');
 
 	/**
 	** Cargos
@@ -256,9 +271,9 @@
 		Route::get('/clientes/index', 'ClienteController@index')->name('clientes.index');
 	});
 
-	Route::group(['middleware' => ['permission:clientes.show']], function () {
-		Route::get('/clientes/{id}/show', 'ClienteController@show')->name('clientes.show');
-	});
+	// Route::group(['middleware' => ['permission:clientes.show']], function () {
+	// 	Route::get('/clientes/{id}/show', 'ClienteController@show')->name('clientes.show');
+	// });
 
 
 
@@ -287,14 +302,12 @@
 
 
 
-
-
 	/*
 	Plan de pagos
 	*/
-	Route::group(['middleware' => ['permission:pagos.update']], function () {
-		Route::put('/pagos/{detalleCampania}', 'PagoController@update')->name('pagos.update');
-	});
+	// Route::group(['middleware' => ['permission:pagos.update']], function () {
+	// 	Route::put('/pagos/{detalleCampania}', 'PagoController@update')->name('pagos.update');
+	// });
 
 	Route::group(['middleware' => ['permission:pagos.detalles']], function () {
 		Route::get('/pagos/detalles/{id}', 'PagoController@detalles')->name('pagos.detalles');
@@ -305,17 +318,17 @@
 	/************************************************************
 		Detalles de Pagos obtenidos de la Api
 	************************************************************/
-	Route::group(['middleware' => ['permission:pagos.detallespago']], function () {
-		Route::get('/pagos/detalles/pago/{id}', 'PagoController@detallePagos')->name('pagos.detallespago');
-	});
+	// Route::group(['middleware' => ['permission:pagos.detallespago']], function () {
+	// 	Route::get('/pagos/detalles/pago/{id}', 'PagoController@detallePagos')->name('pagos.detallespago');
+	// });
 	/************************************************************/
 
 
 
 
-	Route::group(['middleware' => ['permission:pagos.destroy']], function () {
-	Route::delete('/pagos/{id}', 'PagoController@destroy')->name('pagos.destroy');
-	});
+	// Route::group(['middleware' => ['permission:pagos.destroy']], function () {
+	// 	Route::delete('/pagos/{id}', 'PagoController@destroy')->name('pagos.destroy');
+	// });
 
 
 
@@ -337,11 +350,11 @@
 
 
 	Route::get('/cifrar/{pass}', function ($pass) {
-	$opciones = [
-	'cost' => 12,
-	];
+		$opciones = [
+			'cost' => 12,
+		];
 
-	echo password_hash($pass, PASSWORD_BCRYPT, $opciones)."\n";
+		echo password_hash($pass, PASSWORD_BCRYPT, $opciones)."\n";
 	});
 
 
@@ -362,61 +375,5 @@
 
 
 
-	/**procesos sistemas */
-	Route::resource('procesos', 'PredictivoController');
-
-	/**
-	 * Procesos de list y log, consolidado en el servidor 192.168.1.7 para consolidar la informacion predictiva
-	 */
-	Route::get('/porcesos/log_lis', 'PredictivoController@log_lis')->name('porcesos.log_lis');
-	/************************************************** */
-	/**
-	 * Procesos para quitar estados cerrados de un lote a otro. esto solo del predictivo. 
-	 */
-
-	Route::get('/porcesos/estadoscerrados', 'PredictivoController@estadoscerrados')->name('porcesos.estadoscerrados');
-	Route::post('/procesos/storecobranza', 'PredictivoController@storecobranza')->name('vicidial.storecobranza');
-	Route::post('/procesos/pre', 'PredictivoController@pre')->name('vicidial.pre');
-	Route::post('/procesos/precobranza', 'PredictivoController@precobranza')->name('vicidial.precobranza');
-
-
-	Route::get('cobranza', 'PredictivoController@cobranza')->name('cobranza');
-
-
-	/**
-	 *  COBRANZA Asignaciones   
-	 */
-
-	Route::resource('Asignaciones', 'Cobranza\AsignacionController');
-	Route::get('DESCARGARRESPALDO', 'Cobranza\AsignacionController@descargarespaldo');
-	Route::post('importAsignaciones', 'Cobranza\AsignacionController@importData');
-
 	
-	Route::get('/clientes/{idc}/{ced}', 'Cobranza\ClientesController@edit')->name('clientes.edit');
-	Route::PATCH('/clientes/update/{idc}/{ced}', 'Cobranza\ClientesController@update')->name('clientes.update');
-	Route::get('/clientes/{idc}/{ced}/show', 'Cobranza\ClientesController@show')->name('clientes.show');
-	Route::get('/clientes/id={id}', 'Cobranza\ClientesController@cartera')->name('clientes.cartera');
-
-	/**
-	 *  Bandehas  clientes   Coabranza
-	 */
-
-	Route::resource('bandeja', 'Cobranza\BandejaController')->except([
-		'edit','update','show'
-	]);
-	Route::get('bandeja/datos', 'Cobranza\BandejaController@data');
-	/**
-	 *  Ventas clientes   
-	 */
-	/**
-	 * buscador en tiempo real
-	 */
-	Route::get('buscador', 'Ventas\BandejaventasController@buscador');
-	Route::resource('agenda', 'Ventas\BandejaventasController')->except([
-		'show'
-	]);;
-	Route::get('agendadatos', 'Ventas\BandejaventasController@agenda');
-	Route::get('agendadatos/show/{id}/{idcam}', 'Ventas\BandejaventasController@show')->name('agenda.show');
-
-	Route::resource('agendar', 'Ventas\AgendaController');
 

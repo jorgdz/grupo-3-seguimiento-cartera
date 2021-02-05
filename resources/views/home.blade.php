@@ -48,8 +48,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Cargo</th>
-                                                <th>Departamento</th>
-                                                <th>Empresa</th>
+                                                <th>Departamento</th>               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,8 +56,7 @@
                                               <tr>
                                                 <td>{{ ($key + 1) }}</td>
                                                 <td>{{ $cargoDep->cargo->nombre_cargo }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->departamento->nombre_departamento }}</td>
-                                                <td>{{ $cargoDep->departamentoEmpresa->empresa->nombre_empresa }}</td>                                                
+                                                <td>{{ $cargoDep->departamento->nombre_departamento }}</td>                                                                   
                                               </tr>
                                             @endforeach
                                         </tbody>
@@ -69,6 +67,10 @@
                                 @endif
                             </div>
                         </ul>
+                        @if($user->campania)
+                            <hr>
+                            <h5><strong>Campaña:</strong> {{ $user->campania }}</h5>
+                        @endif
                     @else
                         <h3><em>Por favor usuario, actualice sus datos antes de empezar a trabajar, <a href="{{route('perfil.edit')}}">Ir a mi perfil.</a></em></h3>
                     @endif

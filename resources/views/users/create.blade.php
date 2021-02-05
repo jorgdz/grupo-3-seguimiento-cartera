@@ -104,7 +104,7 @@
                             
                             <div class="form-group">
                                 {{ Form::label('campania', 'Campaña') }}
-                                {{ Form::text('campania', null, ['placeholder' => 'Campaña asignada', 'class' => 'form-control']) }}
+                                {!! Form::select('campania', $campanias->pluck('nombre_campania', 'nombre_campania'), null, ['class' => 'form-control']) !!}
                             </div> 
 
                             <div class="form-group">

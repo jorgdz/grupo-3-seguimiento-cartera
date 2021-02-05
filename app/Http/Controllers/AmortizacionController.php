@@ -27,7 +27,7 @@ class AmortizacionController extends Controller
             return redirect()->back()->withInput()->withErrors($validate->errors());
         }
 
-        $pago = Pago::with(['detallePagos' => function ($q) { $q->orderBy('id', 'asc'); }, 'detalleCampania'])->findOrFail($request->pago_id);
+        $pago = Pago::with(['detallePagos' => function ($q) { $q->orderBy('id', 'asc'); }])->findOrFail($request->pago_id);
         
     	$detallePago = $pago->detallePagos->last();
     	$dp = DetallePago::findOrFail($detallePago->id);
@@ -54,6 +54,13 @@ class AmortizacionController extends Controller
     	}
        
 		$dp->cuota_fija = $dp->cuota_fija + $request->cuota_fija;
+		
+		if (((round($dp->cuota_fija, 4)) < round($pago->cuota, 4))) {
+			$dp->estado_pago = 'PENDIENTE';
+		}else{
+			$dp->estado_pago = 'PAGADO';
+		}
+
     	$dp->update();
 
     	if (round($dp->cuota_fija, 4) == round($pago->cuota, 4)) 
@@ -65,7 +72,7 @@ class AmortizacionController extends Controller
         	/*
 				Actualizando el saldo de la deuda de la campaña del cliente
         	*/
-        	$detalleCampania = DetalleCampania::findOrFail($pago->detalle_campania_id);
+        	$detalleCampania = DetalleCampania::findOrFail($pago->campania_id->id);
         	$detalleCampania->valor_saldo = $saldoInicial;
         	$detalleCampania->update();
             
@@ -81,6 +88,7 @@ class AmortizacionController extends Controller
 	        	$newDetallePago->saldo_inicial = $saldoInicial;
 
 	        	$newDetallePago->cuota_fija = 0;
+	        	$newDetallePago->estado_pago = 'PENDIENTE';
 	        	$newDetallePago->fecha_pago = date("Y-m-d", strtotime($dp->fecha_pago."+ 1 month"));
 	        	$newDetallePago->save();
             }

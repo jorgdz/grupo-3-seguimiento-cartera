@@ -7,6 +7,7 @@ use App\User;
 use App\Models\Admin\Role;
 use App\Models\Admin\Cargo;
 use App\Models\Admin\Genero;
+use App\Models\Admin\Campania;
 use App\Models\Admin\Empresa;
 use App\Models\Admin\Departamento;
 use App\Models\Admin\CargoDepartamento;
@@ -51,7 +52,8 @@ class UserController extends Controller
     public function create()
     {   
         $generos = Genero::orderBy('id', 'asc')->get();
-        return view('users.create', array('generos' => $generos));
+        $campanias = Campania::orderBy('nombre_campania', 'asc')->get();
+        return view('users.create', array('generos' => $generos, 'campanias' => $campanias));
     }
 
 
@@ -142,7 +144,7 @@ class UserController extends Controller
         $user->estado_civil = $request->estado_civil;
         $user->email = $request->email;
         $user->genero_id = $request->genero_id;
-        $user->foto = 'user.png';
+        $user->foto = 'https://storage.googleapis.com/istb-storage.appspot.com/cartera/user.png';
         $user->campania = $request->campania;
         $usuariogenerado = $this->getNickname(strtolower($request->nombre1), strtolower($request->nombre2), strtolower($request->apellido_paterno), strtolower($request->apellido_materno));
         
@@ -274,23 +276,7 @@ class UserController extends Controller
         $roles = Role::orderBy('id', 'desc')->get();
         $user = User::with(['usuarioRoles', 'genero'])->findOrFail($id);
 
-        $tmp_campanias = [
-            [
-                'id' => 1,
-                'nombre' => 'RM'
-            ],
-            [
-                'id' => 2,
-                'nombre' => 'Super Exito'
-            ],
-            [
-                'id' => 3,
-                'nombre' => 'Super Easy'
-            ]
-        ];
-
-        $campanias = collect($tmp_campanias);
-
+        $campanias = Campania::orderBy('nombre_campania', 'asc')->get();
         return view('users.edit', ['user' => $user, 'roles' => $roles, 'generos' => $generos, 'campanias' => $campanias]);
     }
 

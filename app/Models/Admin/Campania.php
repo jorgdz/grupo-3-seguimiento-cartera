@@ -7,7 +7,7 @@ use App\Models\Admin\DetalleCampania;
 
 class Campania extends Model
 {
-   // protected $table = "campanias";
+    protected $table = "campanias";
     protected $fillable = ['nombre_campania', 'descripcion'];
     protected $primaryKey = 'id';
     public $timestamps = false;

@@ -39,3 +39,13 @@
     from { transform: rotate(0deg);}
     to { transform: rotate(360deg); }
 }
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.imgUser{
+    width: 90px;
+    border-radius: 50%;
+}
