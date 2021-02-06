@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 public/
+web: vendor/bin/heroku-php-apache2 public/ php artisan websocket:init > websocket.log &
