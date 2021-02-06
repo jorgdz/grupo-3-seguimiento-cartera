@@ -2267,7 +2267,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log("Componente dashboard montado.");
     var me = this;
     me.getPagos();
-    me.socket = new WebSocket("ws://localhost:80");
+    me.socket = new WebSocket("ws://localhost:8090");
 
     me.socket.onmessage = function (e) {
       console.log(e.data);
@@ -2560,7 +2560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var socket = new WebSocket("ws://localhost:80");
+var socket = new WebSocket("ws://localhost:8090");
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
