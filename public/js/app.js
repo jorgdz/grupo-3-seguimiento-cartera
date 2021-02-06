@@ -2267,12 +2267,14 @@ __webpack_require__.r(__webpack_exports__);
     console.log("Componente dashboard montado.");
     var me = this;
     me.getPagos();
-    me.socket = new WebSocket("ws://localhost:8090");
+    me.socket = new WebSocket("ws://localhost:8090"); // me.socket.onmessage = function(e) {
+    //     console.log(e.data);
+    //     me.getPagos();
+    // };
 
-    me.socket.onmessage = function (e) {
-      console.log(e.data);
+    setInterval(function () {
       me.getPagos();
-    };
+    }, 2000);
   }
 });
 
@@ -2739,8 +2741,8 @@ var socket = new WebSocket("ws://localhost:8090");
             campania: me.cliente.campania.nombre_campania
           }).then(function (res) {
             me.getPagos();
-            me.amortizar = false;
-            socket.send("Pago creado!!");
+            me.amortizar = false; // socket.send("Pago creado!!");
+
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Correcto", res.data.success, "success");
             me.resetError();
             me.reset();
@@ -2772,8 +2774,8 @@ var socket = new WebSocket("ws://localhost:8090");
         if (result.value) {
           var me = _this;
           axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/apipago/" + id).then(function (res) {
-            me.getPagos();
-            socket.send("Pago eliminado!!");
+            me.getPagos(); // socket.send("Pago eliminado!!");
+
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()("Borrarlo!", "Pago eliminado.", "success");
           })["catch"](function (err) {
             console.log(err);
