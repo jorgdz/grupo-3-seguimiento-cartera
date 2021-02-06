@@ -264,7 +264,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import NP from "number-precision";
 
-var socket = new WebSocket("ws://ws://localhost:80");
+var socket = new WebSocket("ws://localhost:80");
 
 export default {
     props: ["id"],

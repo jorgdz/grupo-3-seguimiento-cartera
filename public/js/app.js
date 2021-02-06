@@ -2560,7 +2560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var socket = new WebSocket("ws://ws://localhost:80");
+var socket = new WebSocket("ws://localhost:80");
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
