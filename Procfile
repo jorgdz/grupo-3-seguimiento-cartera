@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-nginx public/
+web: vendor/bin/heroku-php-apache2 public/ php bin/console bot:start
