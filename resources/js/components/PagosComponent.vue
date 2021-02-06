@@ -264,7 +264,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import NP from "number-precision";
 
-var socket = new WebSocket("ws://localhost:8090");
+var socket = new WebSocket("ws://cartera-estudio-juridico.herokuapp.com:8090");
 
 export default {
     props: ["id"],

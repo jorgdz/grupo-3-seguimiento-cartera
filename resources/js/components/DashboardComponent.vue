@@ -81,7 +81,9 @@ export default {
         var me = this;
 
         me.getPagos();
-        me.socket = new WebSocket("ws://localhost:8090");
+        me.socket = new WebSocket(
+            "ws://cartera-estudio-juridico.herokuapp.com:8090"
+        );
 
         me.socket.onmessage = function(e) {
             console.log(e.data);
