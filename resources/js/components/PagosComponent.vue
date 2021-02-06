@@ -553,7 +553,7 @@ export default {
                             me.getPagos();
                             me.amortizar = false;
 
-                            socket.send("Pago creado!!");
+                            // socket.send("Pago creado!!");
 
                             swal("Correcto", res.data.success, "success");
 
@@ -594,7 +594,7 @@ export default {
                         .then(res => {
                             me.getPagos();
 
-                            socket.send("Pago eliminado!!");
+                            // socket.send("Pago eliminado!!");
 
                             swal("Borrarlo!", "Pago eliminado.", "success");
                         })
