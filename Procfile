@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-nginx -C nginx_app.conf public/ php artisan websocket:init
+web: vendor/bin/heroku-php-nginx public/ php artisan websocket:init
