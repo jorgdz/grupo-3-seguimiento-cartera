@@ -50,7 +50,7 @@
                                         <th># Periodos</th>
                                        	<th>Saldo inicial</th>
                                         <th>Cuota fija</th>
-                                        <th>Interes</th>
+                                        <th>Interés</th>
                                         <th>Abono al capital</th>     
                                         <th>Saldo final</th>                                     
                                         <th>Fecha de pago</th>                                     
@@ -64,11 +64,11 @@
                                         <?php $capital = $amortizacion->cuota_fija - $interes ?>
 
                                         <td>{{ ($key + 1) }}</td>
-                                        <td>${{ $amortizacion->saldo_inicial }}</td>
-                                        <td>${{ $amortizacion->cuota_fija }}</td>
-                                        <td>${{ $interes }} </td>
-                                        <td>${{ $capital }}</td>
-                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : ($amortizacion->saldo_inicial - $capital) }}</td>                           
+                                        <td>${{ round($amortizacion->saldo_inicial, 4) }}</td>
+                                        <td>${{ $amortizacion->cuota_fija, 4 }}</td>
+                                        <td>${{ round($interes, 4) }} </td>
+                                        <td>${{ round($capital, 4) }}</td>
+                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : round($amortizacion->saldo_inicial - $capital, 4) }}</td>                           
                                         <td>{{ date('d-M-Y', strtotime($amortizacion->fecha_pago))}}</td>                           
                                         <td>
                                         	

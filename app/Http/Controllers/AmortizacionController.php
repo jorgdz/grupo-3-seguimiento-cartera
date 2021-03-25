@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\DetallePago;
 use App\Models\Admin\Pago;
 use App\Models\Admin\DetalleCampania;
+use PDF;
 
 class AmortizacionController extends Controller
 {
@@ -95,7 +96,29 @@ class AmortizacionController extends Controller
     	}
 
 		return redirect()->route('pagos.detalles', $pago->id)->with('msg', 'Gracias, por favor se cumplido en tus pagos !!');     
-    }
+    }	
+
+	public function generatePDF ($id) {
+		$pago = Pago::findOrFail($id);
+		$detallesPagos = DetallePago::where('pago_id', $id)->get();
+
+		$count = 0;
+		foreach($detallesPagos as $detalle) {
+			if($detalle->cuota_fija == $pago->cuota) {
+				$count ++;
+			}
+		}
+
+		$detalles = [
+			'cuotas_pagadas' => $count,
+			'detallesPagos' => $detallesPagos,
+			'pago' => $pago
+		];
+
+		return PDF::loadView('pdf.detalle-pagos', array('detalles' => $detalles))
+			->setPaper('a4', 'landscape')
+			->stream('reporte-general.pdf');
+	}
 
     public function simulador()
     {

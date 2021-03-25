@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\DetalleCampania;
 use App\Models\Admin\Pago;
 use App\Models\Admin\DetallePago;
+use PDF;
 
 class PagoController extends Controller
 {
@@ -20,6 +21,93 @@ class PagoController extends Controller
         //
     }
 
+    /**
+     * Show general pago the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generalReportClients($estado)
+    {
+        $pagos = Pago::with(['detallePagos' => function ($q) { 
+            $q->where('cuota_fija', '>', 0)->orderBy('id', 'asc'); 
+        }])->get();
+        
+        $resp = [];
+        
+        $diasVencidos = 0;
+        $countIncumplido = 0;
+
+        $countPendiente = 0;
+        $countPagado = 0;
+
+        $title = '';
+        if ($estado == 'Incumplido') {
+            $pagos = Pago::with(['detallePagos' => function ($q) { 
+                $q->where('fecha_pago', '<', date('Y-m-d'))->orderBy('id', 'asc'); 
+            }])->get();
+
+            foreach($pagos as $pago) {
+                $countIncumplido = 0;
+                foreach($pago->detallePagos as $amortizacion) {
+                   if ($amortizacion->fecha_pago <  date('Y-m-d') && $amortizacion->cuota_fija < round($pago->cuota, 4)) {
+                    $currentDate = \Carbon\Carbon::createFromFormat('Y-m-d', date('Y-m-d'));
+                    $shippingDate = \Carbon\Carbon::createFromFormat('Y-m-d', $amortizacion->fecha_pago);
+
+                    $diferencia_en_dias = $currentDate->diffInDays($shippingDate);
+                    $diasVencidos += $diferencia_en_dias;
+
+                    $countIncumplido ++;
+                   }
+                }
+                
+                if ($countIncumplido >= 1) {
+                    $pago->dias_vencidos = $diasVencidos;
+                    array_push($resp, $pago);
+                }
+            }
+
+            $title = 'Clientes incumplidos';
+        }
+
+        if ($estado == 'Pendiente') {
+            foreach($pagos as $pago) {
+                $countPendiente = 0;
+                foreach($pago->detallePagos as $amortizacion) {
+                    if ($amortizacion->estado_pago == 'PENDIENTE') {
+                        $countPendiente ++;
+                    }
+                }
+
+                if ($countPendiente >= 1) {
+                    array_push($resp, $pago);
+                }
+            }
+
+            $title = 'Clientes pendientes';
+        }
+
+        if ($estado == 'Aldia') {
+            foreach($pagos as $pago) {
+                $countPagado = 0;
+                foreach($pago->detallePagos as $amortizacion) {
+                    if ($amortizacion->estado_pago == 'PAGADO') {
+                        $countPagado ++;
+                    }
+                }
+
+                if ($countPagado >= 1 && sizeof($pago->detallePagos) == $countPagado) {
+                    array_push($resp, $pago);
+                }
+            }
+
+            $title = 'Clientes al día';
+        }
+        
+        return PDF::loadView('pdf.clientes-general', array('resp' => $resp, 'title' => $title))
+            ->setPaper('a4', 'landscape')
+            ->stream('reporte-general.pdf');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

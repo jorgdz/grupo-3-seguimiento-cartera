@@ -47,7 +47,7 @@
                     	{{ Form::label('abono', 'Valor de la cuota ($)') }}
                     	: Su valor de la cuota mensual es: <strong>{{ round($pago->cuota, 3) }}</strong>
     
-                    	<p><em>Saldo de la deuda: <strong>{{ ($pago->campania_id->valor_saldo < 0.024) ? 0 : $pago->campania_id->valor_saldo }}</strong> </em></p>
+                    	<p><em>Saldo de la deuda: <strong>{{ ($pago->campania_id->valor_saldo < 0.024) ? 0 : round($pago->campania_id->valor_saldo, 4) }}</strong> </em></p>
                     	<div class="col-lg-10">
 	                        <div class="form-group">
                             	<div class="row">                    
@@ -60,7 +60,14 @@
                     {!! Form::close() !!}
 
                     <div class="row">
-                        <h5><strong>Tabla de amortización</strong></h5>
+                        <div class="col-sm-6">
+                            <h5><strong>Tabla de amortización</strong></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="float:right;">
+                                <a class="btn btn-md btn-info" target="_blank" href="/pagos/imprimir/{{$pago->id}}"> <i class="fa fa-print"></i> </a>
+                            </div>
+                        </div>
                         <div class="table-responsive"> 
                             <table class="table table-bordered table-hover table-striped ">
                                 <thead>
@@ -68,7 +75,7 @@
                                         <th># Periodos</th>
                                        	<th>Saldo inicial</th>
                                         <th>Cuota fija</th>
-                                        <th>Interes</th>
+                                        <th>Interés</th>
                                         <th>Abono al capital</th>     
                                         <th>Saldo final</th>                                     
                                         <th>Fecha de pago</th>                                     
@@ -82,11 +89,11 @@
                                         <?php $capital = $amortizacion->cuota_fija - $interes ?>
 
                                         <td>{{ ($key + 1) }}</td>
-                                        <td>${{ $amortizacion->saldo_inicial }}</td>
-                                        <td>${{ $amortizacion->cuota_fija }}</td>
-                                        <td>${{ $interes }} </td>
-                                        <td>${{ $capital }}</td>
-                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : ($amortizacion->saldo_inicial - $capital) }}</td>
+                                        <td>${{ round($amortizacion->saldo_inicial, 4) }}</td>
+                                        <td>${{ round($amortizacion->cuota_fija, 4) }}</td>
+                                        <td>${{ round($interes, 4) }} </td>
+                                        <td>${{ round($capital, 4) }}</td>
+                                        <td>${{ (($amortizacion->saldo_inicial - $capital) < 0.1) ? 0 : round(($amortizacion->saldo_inicial - $capital), 4) }}</td>
                                         <td>{{ date('d-M-Y', strtotime($amortizacion->fecha_pago))}}</td>                           
                                         <td>
                                         	

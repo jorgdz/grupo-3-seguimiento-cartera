@@ -181,6 +181,10 @@
 	Route::group(['middleware' => ['permission:departamentos.edit']], function () {
 		Route::get('/departamentos/{id}/edit', 'DepartamentoController@edit')->name('departamentos.edit');
 	});
+	
+	Route::group(['middleware' => ['permission:pagos.report-general']], function () {
+		Route::get('/pagos/report-general/{estado}', 'PagoController@generalReportClients')->name('pagos.report-general');
+	});
 
 
 	Route::get('/api/departamentos/{id}', 'DepartamentoController@show')->name('departamentos.show');
@@ -311,6 +315,10 @@
 
 	Route::group(['middleware' => ['permission:pagos.detalles']], function () {
 		Route::get('/pagos/detalles/{id}', 'PagoController@detalles')->name('pagos.detalles');
+	});
+	
+	Route::group(['middleware' => ['permission:pagos.imprimir']], function () {
+		Route::get('/pagos/imprimir/{id}', 'AmortizacionController@generatePDF')->name('pagos.imprimir');
 	});
 
 
