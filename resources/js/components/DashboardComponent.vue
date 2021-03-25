@@ -83,10 +83,14 @@ export default {
         me.getPagos();
         me.socket = new WebSocket("ws://localhost:8090");
 
-        me.socket.onmessage = function(e) {
-            console.log(e.data);
+        // me.socket.onmessage = function(e) {
+        //     console.log(e.data);
+        //     me.getPagos();
+        // };
+
+        setInterval(() => {
             me.getPagos();
-        };
+        }, 2000);
     }
 };
 </script>
